@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUSNAIN FASHION | Luxury Pakistani Men's Clothing | Summer & Winter</title>
+    
+    <!-- Meta SEO & Social -->
+    <meta name="description" content="Discover Husnain Fashion - Pakistan's premier luxury clothing brand for men. Exquisite casual & formal shirts, tailored chinos, Italian trousers, pure wool overcoats, and winter blazers. Free nationwide home delivery above Rs. 5,000. Cash on Delivery available.">
+    <meta name="keywords" content="Husnain Fashion, Pakistani Men Clothing, Mens Fashion Pakistan, Casual Shirts, Formal Shirts, Blazers Pakistan, Winter Coats Lahore, Chinos Karachi, Cash on Delivery Pakistan">
+    <meta name="author" content="Husnain Fashion">
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ====================================================================
+         Announcement Ticker Bar
+         ==================================================================== -->
+    <aside class="announcement-bar" aria-label="Special Announcements">
+        <div class="container announcement-content">
+            <div class="announcement-ticker">
+                <span class="ticker-item">
+                    <span class="flag-pk">🇵🇰</span> <strong>Free Home Delivery</strong> on orders above Rs. 5,000 across Pakistan
+                </span>
+                <span class="ticker-item" style="color: var(--color-gold);">•</span>
+                <span class="ticker-item">
+                    <i class="fa-solid fa-snowflake text-gold"></i> <strong>Winter Collection:</strong> Flat 20% OFF with code <code>WINTER20</code>
+                </span>
+                <span class="ticker-item" style="color: var(--color-gold);">•</span>
+                <span class="ticker-item">
+                    <i class="fa-solid fa-money-bill-wave text-gold"></i> <strong>Cash on Delivery (COD)</strong> available nationwide
+                </span>
+            </div>
+
+            <div class="announcement-links">
+                <a href="customer.html"><i class="fa-solid fa-user"></i> My Account</a>
+                <a href="admin.html" target="_blank"><i class="fa-solid fa-shield-halved"></i> Admin Portal</a>
+                <a href="#tracking-section"><i class="fa-solid fa-location-dot"></i> Track Order</a>
+                <a href="javascript:void(0)" onclick="openWhatsAppSupport()"><i class="fa-brands fa-whatsapp"></i> +92 300 HUSNAIN</a>
+                <a href="javascript:void(0)" onclick="openModal('sizeGuideModal')"><i class="fa-solid fa-ruler-combined"></i> Size Guide</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ====================================================================
+         Main Luxury Header & Navigation Bar
+         ==================================================================== -->
+    <header class="header">
+        <div class="container header-container">
+            <!-- Brand Logo -->
+            <a href="index.html" class="brand-logo" aria-label="Husnain Fashion Home">
+                <div class="logo-crest">HF</div>
+                <div class="brand-text">
+                    <span class="brand-name">HUSNAIN <span>FASHION</span></span>
+                    <span class="brand-sub">HAUTE COUTURE • LAHORE • KARACHI</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links with Dropdowns -->
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <li class="nav-item">
+                    <a href="#hero-section" class="nav-link active">Home</a>
+                </li>
+
+                <!-- Shirts Dropdown -->
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link" onclick="filterByCategory('shirts')">
+                        Shirts <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('shirts', 'casual-shirts')">
+                                Casual Shirts <span class="dropdown-badge">Popular</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('shirts', 'formal-shirts')">
+                                Formal Shirts <span class="dropdown-badge">Executive</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('shirts', 'polo-shirts')">
+                                Polo Shirts <span class="dropdown-badge">Summer</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('shirts', 'cotton-shirts')">
+                                Cotton Shirts <span class="dropdown-badge">Multan</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('shirts', 'printed-shirts')">
+                                Printed Shirts <span class="dropdown-badge">Artisan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Trousers Dropdown -->
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link" onclick="filterByCategory('trousers')">
+                        Trousers <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('trousers', 'formal-trousers')">
+                                Formal Trousers <span class="dropdown-badge">Pleated</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('trousers', 'casual-trousers')">
+                                Casual Trousers <span class="dropdown-badge">Stretch</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('trousers', 'chinos')">
+                                Chinos <span class="dropdown-badge">Essential</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('trousers', 'cotton-trousers')">
+                                Cotton Trousers <span class="dropdown-badge">Summer</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('trousers', 'jeans')">
+                                Denim Jeans <span class="dropdown-badge">Selvedge</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Coats & Winter Collection Dropdown -->
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link" onclick="filterByCategory('coats-winter')">
+                        Coats & Winter <i class="fa-solid fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'wool-coats')">
+                                Wool Coats <span class="dropdown-badge">20% OFF</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'blazers')">
+                                Tailored Blazers <span class="dropdown-badge">Velvet/Hopsack</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'winter-coats')">
+                                Winter Coats & Parkas <span class="dropdown-badge">Down Thermal</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'jackets')">
+                                Jackets & Suede <span class="dropdown-badge">Sialkot Leather</span>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'formal-coats')">
+                                Formal Overcoats <span class="dropdown-badge">Diplomat</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link" onclick="filterBySeason('summer')">Summer ☀️</a>
+                </li>
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="nav-link" onclick="filterBySeason('winter')">Winter ❄️</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#offers-section" class="nav-link text-gold">Offers %</a>
+                </li>
+            </nav>
+
+            <!-- Utility Action Icons -->
+            <div class="header-actions">
+                <!-- Search Button -->
+                <button class="action-btn" onclick="document.getElementById('searchInput')?.focus(); document.getElementById('shop-section')?.scrollIntoView({behavior: 'smooth'})" title="Search Garments">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <!-- Track Order Shortcut -->
+                <a href="#tracking-section" class="action-btn" title="Track Live Pakistani Order">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </a>
+
+                <!-- Wishlist Trigger -->
+                <button class="action-btn" onclick="toggleWishlistDrawer()" title="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge-count" id="wishlistBadgeCount">0</span>
+                </button>
+
+                <!-- User Account Trigger -->
+                <button class="action-btn" id="userAccountBtn" onclick="openModal('authModal')" title="Account / Sign In">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+
+                <!-- Cart Drawer Trigger -->
+                <button class="action-btn" onclick="toggleCartDrawer()" title="Shopping Bag">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge-count" id="cartBadgeCount">0</span>
+                </button>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="hamburger-btn action-btn" onclick="toggleMobileNav()" title="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================
+         Hero Section Carousel
+         ==================================================================== -->
+    <section class="hero-section" id="hero-section">
+        <!-- Slide 1: Winter Royal Haute Couture -->
+        <div class="hero-slide active">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=1920&q=85" alt="Winter Overcoats & Blazers">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-tag"><i class="fa-solid fa-snowflake"></i> Royal Winter Collection 2026</span>
+                    <h1 class="hero-title">Timeless Warmth. <span>Savile Row</span> Tailoring.</h1>
+                    <p class="hero-desc">Indulge in 100% pure Australian virgin wool overcoats, bespoke double-breasted blazers, and thermal down parkas handcrafted for cold winter evenings in Lahore, Islamabad, and Murree.</p>
+                    <div class="hero-pricing">
+                        <span>Starting from Rs. 5,999 – 14,999</span>
+                        <span class="badge">FLAT 20% OFF</span>
+                    </div>
+                    <div class="hero-cta-group">
+                        <button class="btn btn-gold" onclick="filterByCategory('coats-winter'); filterBySeason('winter');">
+                            <i class="fa-solid fa-bag-shopping"></i> Explore Winter
+                        </button>
+                        <button class="btn btn-outline" onclick="copyCoupon('WINTER20')">
+                            Use Code: WINTER20
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Pakistani Summer Luxury -->
+        <div class="hero-slide">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1920&q=85" alt="Summer Shirts & Chinos">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-tag"><i class="fa-solid fa-sun"></i> Summer Elegance</span>
+                    <h1 class="hero-title">Breezy Multani Cotton. <span>Effortless</span> Grace.</h1>
+                    <p class="hero-desc">Engineered for sweltering Pakistani summers. Breathable Giza cotton shirts, artisan Cuban prints, and tailored lightweight stretch chinos designed to keep you poised and cool.</p>
+                    <div class="hero-pricing">
+                        <span>Starting from Rs. 1,499 – 3,499</span>
+                        <span class="badge" style="background: var(--color-summer);">SUMMER EDIT</span>
+                    </div>
+                    <div class="hero-cta-group">
+                        <button class="btn btn-gold" onclick="filterByCategory('shirts'); filterBySeason('summer');">
+                            <i class="fa-solid fa-shirt"></i> Shop Summer Collection
+                        </button>
+                        <button class="btn btn-outline" onclick="filterByCategory('trousers', 'chinos')">
+                            Discover Chinos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Executive Formal Mastery -->
+        <div class="hero-slide">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1920&q=85" alt="Executive Formalwear">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-tag"><i class="fa-solid fa-crown"></i> The Executive Suite</span>
+                    <h1 class="hero-title">Command the Room with <span>Bespoke</span> Poise.</h1>
+                    <p class="hero-desc">Precision Italian pleated trousers with brass side-adjusters, French cuff two-ply cotton formal shirts, and tailored evening velvet blazers for Pakistani corporate titans and gala receptions.</p>
+                    <div class="hero-pricing">
+                        <span>Formal Trousers from Rs. 2,499 | Blazers from Rs. 5,999</span>
+                    </div>
+                    <div class="hero-cta-group">
+                        <button class="btn btn-gold" onclick="filterByCategory('shirts', 'formal-shirts')">
+                            Explore Formalwear
+                        </button>
+                        <button class="btn btn-outline" onclick="filterByCategory('trousers', 'formal-trousers')">
+                            Side-Adjuster Trousers
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="hero-controls">
+            <button class="slider-arrow" id="heroPrev" aria-label="Previous Slide">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="slider-dots"></div>
+            <button class="slider-arrow" id="heroNext" aria-label="Next Slide">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Trust & Value Propositions Bar
+         ==================================================================== -->
+    <section class="trust-bar" aria-label="Store Guarantees">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <div class="trust-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                    <div class="trust-text">
+                        <h4>Free Home Delivery</h4>
+                        <p>Orders above Rs. 5,000 delivered free nationwide</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="trust-text">
+                        <h4>Cash on Delivery (COD)</h4>
+                        <p>Pay upon inspection across 200+ Pakistani cities</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                    <div class="trust-text">
+                        <h4>30-Day Easy Exchange</h4>
+                        <p>Doorstep size & style exchange with zero hassle</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon"><i class="fa-solid fa-scissors"></i></div>
+                    <div class="trust-text">
+                        <h4>Master Tailoring</h4>
+                        <p>100% fine Multani cotton & imported pure wool</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Special Offers & Weekend Flash Sale Section
+         ==================================================================== -->
+    <section class="offers-section" id="offers-section">
+        <div class="container">
+            <!-- Flash Sale Banner with Live Countdown -->
+            <div class="weekend-sale-banner">
+                <div class="sale-info">
+                    <span class="section-subtitle">Exclusive Limited-Time Event</span>
+                    <h3>Special Weekend Flash Sale 🇵🇰</h3>
+                    <p>Unlock extra discounts across our entire Summer & Winter Haute Couture collections. Nationwide delivery guaranteed before next weekend!</p>
+                </div>
+
+                <div class="countdown-box">
+                    <div class="countdown-segment">
+                        <span class="num" id="saleHours">47</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="countdown-segment">
+                        <span class="num" id="saleMins">38</span>
+                        <span class="label">Minutes</span>
+                    </div>
+                    <div class="countdown-segment">
+                        <span class="num" id="saleSecs">25</span>
+                        <span class="label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Title -->
+            <div class="section-header">
+                <span class="section-subtitle">Curated Savings</span>
+                <h2 class="section-title">Special Offers & Bundle Discounts</h2>
+                <p class="section-desc">We believe luxury menswear should be accessible. Take advantage of our seasonal discounts, bundle incentives, and exclusive promotional codes.</p>
+            </div>
+
+            <!-- Offer Cards Grid -->
+            <div class="offers-grid">
+                <!-- Offer 1 -->
+                <div class="offer-card">
+                    <span class="offer-badge">Storewide</span>
+                    <div class="icon"><i class="fa-solid fa-percent"></i></div>
+                    <h4>10% OFF Selected Styles</h4>
+                    <p>Enjoy an instant 10% discount on selected casual and cotton shirts. Apply code at checkout.</p>
+                    <div class="coupon-code-pill" onclick="copyCoupon('HUSNAIN10')">
+                        <code>HUSNAIN10</code>
+                        <span><i class="fa-regular fa-copy"></i> Copy Code</span>
+                    </div>
+                </div>
+
+                <!-- Offer 2 -->
+                <div class="offer-card">
+                    <span class="offer-badge" style="background: rgba(74, 144, 226, 0.2); color: #64b5f6; border-color: rgba(74, 144, 226, 0.4);">Winter Edit</span>
+                    <div class="icon"><i class="fa-solid fa-snowflake" style="color: #64b5f6;"></i></div>
+                    <h4>20% OFF Winter Collection</h4>
+                    <p>Overcoats, wool blazers, parkas, and shearling jackets discounted by a massive 20%.</p>
+                    <div class="coupon-code-pill" onclick="copyCoupon('WINTER20')">
+                        <code>WINTER20</code>
+                        <span><i class="fa-regular fa-copy"></i> Copy Code</span>
+                    </div>
+                </div>
+
+                <!-- Offer 3 -->
+                <div class="offer-card">
+                    <span class="offer-badge" style="background: rgba(46, 204, 113, 0.2); color: #2ecc71; border-color: rgba(46, 204, 113, 0.4);">Auto Applied</span>
+                    <div class="icon"><i class="fa-solid fa-shirt"></i></div>
+                    <h4>Buy 2 Shirts, Get 10% OFF</h4>
+                    <p>Mix and match any two casual, formal, or polo shirts. The 10% shirt discount is auto-calculated in your cart!</p>
+                    <div class="coupon-code-pill" onclick="filterByCategory('shirts')">
+                        <code style="color: #2ecc71;">AUTO-BUNDLE</code>
+                        <span>Shop Shirts <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- Offer 4 -->
+                <div class="offer-card">
+                    <span class="offer-badge" style="background: rgba(243, 156, 18, 0.2); color: #f39c12; border-color: rgba(243, 156, 18, 0.4);">Best Value</span>
+                    <div class="icon"><i class="fa-solid fa-box-open" style="color: #f39c12;"></i></div>
+                    <h4>Buy 3 Products, Get 15% OFF</h4>
+                    <p>Complete your wardrobe with any 3 garments from our entire catalog and unlock 15% off the grand total.</p>
+                    <div class="coupon-code-pill" onclick="copyCoupon('WEEKEND15')">
+                        <code>WEEKEND15</code>
+                        <span><i class="fa-regular fa-copy"></i> Copy Code</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Shop by Season (Summer vs Winter Spotlight)
+         ==================================================================== -->
+    <section class="season-spotlight">
+        <div class="container">
+            <div class="season-cards">
+                <!-- Summer Collection Card -->
+                <div class="season-card">
+                    <img src="https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1000&q=80" alt="Summer Collection Pakistan">
+                    <div class="season-card-overlay">
+                        <span class="season-pill summer"><i class="fa-solid fa-sun"></i> Pakistani Summer Edit</span>
+                        <h3>Light, Airy & Refined Multani Cotton</h3>
+                        <p>Combat high temperatures with breezy Cuban prints, luxury pique knit polos, and stretch chinos crafted for maximum breathability.</p>
+                        <button class="btn btn-gold btn-sm" onclick="filterBySeason('summer')">
+                            Explore Summer (Rs. 1,499 - 4,499)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Winter Collection Card -->
+                <div class="season-card">
+                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80" alt="Winter Collection Pakistan">
+                    <div class="season-card-overlay">
+                        <span class="season-pill winter"><i class="fa-solid fa-snowflake"></i> Winter Haven Haute Couture</span>
+                        <h3>Pure Cashmere, Wool & Tailored Blazers</h3>
+                        <p>From Murree retreats to Lahore wedding receptions, stay impeccably warm in Australian wool trench overcoats and micro-velvet blazers.</p>
+                        <button class="btn btn-gold btn-sm" onclick="filterBySeason('winter')">
+                            Explore Winter (20% OFF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Comprehensive Product Catalog & Filters
+         ==================================================================== -->
+    <section class="catalog-section" id="shop-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header">
+                <span class="section-subtitle">Exquisite Collections</span>
+                <h2 class="section-title">Discover Husnain Fashion Garments</h2>
+                <p class="section-desc">Handcrafted garments tailored for the modern Pakistani man. Filter by category, season, size, and realistic Pakistani Rupee prices.</p>
+            </div>
+
+            <!-- Quick Category Navigation Pills -->
+            <div class="category-pills-bar">
+                <button class="category-pill active" data-category="all">All Designs</button>
+                <button class="category-pill" data-category="casual-shirts">Casual Shirts (Rs. 1,499 - 2,499)</button>
+                <button class="category-pill" data-category="formal-shirts">Formal Shirts (Rs. 1,999 - 3,499)</button>
+                <button class="category-pill" data-category="polo-shirts">Polo Shirts</button>
+                <button class="category-pill" data-category="cotton-shirts">Cotton Shirts</button>
+                <button class="category-pill" data-category="printed-shirts">Printed Shirts</button>
+                <button class="category-pill" data-category="formal-trousers">Formal Trousers</button>
+                <button class="category-pill" data-category="chinos">Chinos (Rs. 2,499 - 4,499)</button>
+                <button class="category-pill" data-category="jeans">Selvedge Jeans</button>
+                <button class="category-pill" data-category="blazers">Blazers (Rs. 5,999 - 9,999)</button>
+                <button class="category-pill" data-category="wool-coats">Wool Coats (Rs. 6,999 - 14,999)</button>
+                <button class="category-pill" data-category="jackets">Jackets (Rs. 3,999 - 7,999)</button>
+                <button class="category-pill" data-category="winter-coats">Winter Coats</button>
+            </div>
+
+            <!-- Catalog Toolbar: Search, Filter Toggle, Sort -->
+            <div class="catalog-toolbar">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search by shirt, blazer, wool, cotton..." aria-label="Search clothing" autocomplete="off">
+                    <i class="fa-solid fa-xmark search-clear-btn" id="searchClear"></i>
+                    <!-- Instant Live Search Results Dropdown Below Search Bar -->
+                    <div class="search-results-dropdown" id="searchResultsDropdown" role="listbox" aria-label="Live Search Results"></div>
+                </div>
+
+                <div class="filter-actions">
+                    <button class="btn-filter-toggle" id="toggleFilterDrawer">
+                        <i class="fa-solid fa-sliders"></i> Filter Options
+                    </button>
+
+                    <select class="filter-select" id="sortSelect" aria-label="Sort products">
+                        <option value="popularity">Sort: Most Popular</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated ★</option>
+                        <option value="discount">Biggest Discount %</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Collapsible Advanced Filter Drawer -->
+            <div class="filter-drawer" id="filterDrawer">
+                <div class="filter-row">
+                    <!-- Filter: Season -->
+                    <div class="filter-group">
+                        <h5>Season Collection</h5>
+                        <div class="season-filter-list">
+                            <label class="filter-checkbox-label">
+                                <input type="radio" name="seasonFilter" value="all" checked>
+                                <span>All Seasons</span>
+                            </label>
+                            <label class="filter-checkbox-label">
+                                <input type="radio" name="seasonFilter" value="summer">
+                                <span>Summer Collection ☀️</span>
+                            </label>
+                            <label class="filter-checkbox-label">
+                                <input type="radio" name="seasonFilter" value="winter">
+                                <span>Winter Collection ❄️</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Filter: Price Range -->
+                    <div class="filter-group">
+                        <h5>Max Budget (PKR)</h5>
+                        <div class="price-slider-group">
+                            <input type="range" id="priceRange" min="1499" max="15000" step="500" value="15000">
+                            <div class="price-values">
+                                <span>Rs. 1,499</span>
+                                <span id="maxPriceDisplay" style="color: var(--color-gold-bright); font-weight: 700;">Rs. 15,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter: Size -->
+                    <div class="filter-group">
+                        <h5>Size Selector</h5>
+                        <div class="size-filter-list">
+                            <button class="size-filter-btn" data-size="S">S</button>
+                            <button class="size-filter-btn" data-size="M">M</button>
+                            <button class="size-filter-btn" data-size="L">L</button>
+                            <button class="size-filter-btn" data-size="XL">XL</button>
+                            <button class="size-filter-btn" data-size="XXL">XXL</button>
+                        </div>
+                    </div>
+
+                    <!-- Reset Filters Button -->
+                    <div class="filter-group" style="display: flex; flex-direction: column; justify-content: flex-end;">
+                        <button class="btn btn-outline btn-block" onclick="resetAllFilters()">
+                            <i class="fa-solid fa-arrows-rotate"></i> Reset All Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Count & Status -->
+            <div class="catalog-status-bar">
+                <span id="catalogProductsCount">Loading luxury catalog...</span>
+                <div class="active-filters-tags" id="activeFiltersContainer"></div>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="product-grid" id="productsGrid">
+                <!-- Injected via JavaScript from products.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Order Tracking Live Section
+         ==================================================================== -->
+    <section class="tracking-section" id="tracking-section">
+        <div class="container">
+            <div class="tracking-card">
+                <div class="tracking-header">
+                    <span class="section-subtitle"><i class="fa-solid fa-truck-fast"></i> Nationwide Delivery Tracking</span>
+                    <h3>Track Your Pakistani Shipment</h3>
+                    <p>Enter your unique Husnain Fashion order ID to view live consignment status with our courier partners (TCS, Leopards, Call Courier).</p>
+                </div>
+
+                <div class="tracking-form">
+                    <input type="text" id="trackingIdInput" class="tracking-input" placeholder="Enter Order ID (e.g. HF-PK-1083)" aria-label="Order Tracking ID">
+                    <button class="btn btn-gold" id="trackOrderBtn">
+                        <i class="fa-solid fa-location-crosshairs"></i> Track Shipment
+                    </button>
+                </div>
+
+                <!-- Tracking Results Visual Stepper & Info -->
+                <div class="tracking-results" id="trackingResults">
+                    <div class="tracking-summary-bar">
+                        <div class="tracking-info-item">
+                            <span class="label">Consignment ID</span>
+                            <span class="value" id="trackResId">-</span>
+                        </div>
+                        <div class="tracking-info-item">
+                            <span class="label">Courier Partner</span>
+                            <span class="value" id="trackResCourier">-</span>
+                        </div>
+                        <div class="tracking-info-item">
+                            <span class="label">Destination</span>
+                            <span class="value" id="trackResCity">-</span>
+                        </div>
+                        <div class="tracking-info-item">
+                            <span class="label">Estimated Delivery</span>
+                            <span class="value" id="trackResEst">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Stepper -->
+                    <div class="tracking-stepper">
+                        <div class="tracking-stepper-progress" id="stepperProgressBar" style="width: 75%;"></div>
+
+                        <div class="step-node completed">
+                            <div class="step-circle"><i class="fa-solid fa-receipt"></i></div>
+                            <span class="step-label">Order Placed</span>
+                            <span class="step-time">Confirmed</span>
+                        </div>
+
+                        <div class="step-node completed">
+                            <div class="step-circle"><i class="fa-solid fa-scissors"></i></div>
+                            <span class="step-label">Tailored & Inspected</span>
+                            <span class="step-time">Master Cut</span>
+                        </div>
+
+                        <div class="step-node completed">
+                            <div class="step-circle"><i class="fa-solid fa-box"></i></div>
+                            <span class="step-label">Packed for Dispatch</span>
+                            <span class="step-time">Lahore Hub</span>
+                        </div>
+
+                        <div class="step-node active">
+                            <div class="step-circle"><i class="fa-solid fa-truck"></i></div>
+                            <span class="step-label">In Transit (Courier)</span>
+                            <span class="step-time">On Route</span>
+                        </div>
+
+                        <div class="step-node">
+                            <div class="step-circle"><i class="fa-solid fa-house-chimney"></i></div>
+                            <span class="step-label">Delivered</span>
+                            <span class="step-time">COD Handover</span>
+                        </div>
+                    </div>
+
+                    <div style="background: #0f0f13; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 2rem;">
+                        <h5 style="color: var(--color-gold); font-size: 0.95rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            <i class="fa-solid fa-clock-rotate-left"></i> Consignment Activity Log
+                        </h5>
+                        <p id="trackResStatus" style="color: var(--color-beige); font-size: 0.9rem; margin-bottom: 1rem; font-weight: 600;"></p>
+                        <div id="trackingTimelineList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Pakistani Craftsmanship & Heritage (About Us)
+         ==================================================================== -->
+    <section class="about-section" id="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <!-- Image Collage -->
+                <div class="about-images-collage">
+                    <div class="about-img-main">
+                        <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80" alt="Husnain Fashion Tailoring Studio">
+                    </div>
+                    <div class="about-img-sub">
+                        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=600&q=80" alt="Master Tailor Handcrafting Cotton">
+                    </div>
+                    <div class="about-badge-gold">
+                        <span class="years">25+</span>
+                        <span class="text">Years of Heritage</span>
+                    </div>
+                </div>
+
+                <!-- Story Content -->
+                <div class="about-content">
+                    <span class="section-subtitle">The Husnain Legacy</span>
+                    <h2>Couture Craftsmanship Rooted in Pakistan</h2>
+                    <p>Founded on the premise that Pakistani men deserve world-class formalwear and effortless everyday casuals, <strong>HUSNAIN FASHION</strong> represents the finest confluence of traditional sartorial skill and contemporary aesthetics.</p>
+                    <p>Every garment is shaped by master cutters in Lahore and Karachi, utilizing the world's softest Multani long-staple cotton for sweltering summers, and imported Australian virgin wool for harsh northern winters.</p>
+
+                    <div class="about-features">
+                        <div class="about-feature-item">
+                            <i class="fa-solid fa-gem"></i>
+                            <div>
+                                <h5>Pure Fibers Only</h5>
+                                <p>Egyptian Giza cotton, raw selvedge denim & Australian virgin wool.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <div>
+                                <h5>Flagship Boutiques</h5>
+                                <p>DHA Phase 5 Lahore & Dolmen Mall Clifton Karachi.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div>
+                                <h5>30-Day Guarantee</h5>
+                                <p>Zero-risk sizing exchanges delivered right to your doorstep.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature-item">
+                            <i class="fa-solid fa-truck"></i>
+                            <div>
+                                <h5>Nationwide Express</h5>
+                                <p>TCS & Leopards fast dispatch within 24–48 hours.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         Customer Reviews & Ratings Section
+         ==================================================================== -->
+    <section class="reviews-section" id="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Real Feedback from Pakistani Gentlemen</span>
+                <h2 class="section-title">Endorsed by Connoisseurs Nationwide</h2>
+                <p class="section-desc">Over 15,000 satisfied customers across Lahore, Karachi, Islamabad, Faisalabad, and Peshawar.</p>
+            </div>
+
+            <!-- Customer Reviews Grid -->
+            <div class="reviews-grid" id="reviewsContainer">
+                <!-- Dynamically populated or fallback -->
+            </div>
+
+            <div class="write-review-cta">
+                <button class="btn btn-outline" onclick="openModal('reviewModal')">
+                    <i class="fa-regular fa-pen-to-square"></i> Share Your Review & Rating
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         VIP Club & Direct WhatsApp Concierge
+         ==================================================================== -->
+    <section class="vip-section">
+        <div class="container">
+            <div class="vip-box">
+                <div class="vip-icon"><i class="fa-solid fa-crown"></i></div>
+                <h2>Join the Husnain Gentlemen's Club</h2>
+                <p>Receive an exclusive <strong>Rs. 500 Welcome Voucher</strong> on your first order, plus private invitations to seasonal trunk shows and early flash sale access.</p>
+
+                <form class="vip-form" id="vipForm">
+                    <input type="tel" id="vipPhone" placeholder="Enter your mobile (e.g. 0300 1234567)" required aria-label="Mobile Number for VIP Club">
+                    <button type="submit" class="btn btn-gold">Claim Rs. 500 Voucher</button>
+                </form>
+                <span class="vip-note">We respect your privacy. Instant SMS discount code with zero spam.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Portal Switcher Dock (One Single Link Access) -->
+    <nav class="portal-switcher-dock" style="position: fixed; bottom: 20px; left: 20px; z-index: 999; display: flex; gap: 8px; background: rgba(16, 16, 22, 0.94); backdrop-filter: blur(12px); border: 1px solid var(--color-gold); padding: 8px 14px; border-radius: 999px; box-shadow: 0 8px 30px rgba(0,0,0,0.85); align-items: center;" aria-label="Portal Switcher">
+        <span style="font-size: 0.72rem; color: var(--color-gold-light); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding-right: 8px; border-right: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; gap: 5px;">
+            <i class="fa-solid fa-crown" style="color: var(--color-gold);"></i> Hub
+        </span>
+        <a href="index.html" style="font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--color-gold); color: #0b0b0d; text-decoration: none;" title="Online Storefront">
+            <i class="fa-solid fa-store"></i> Store
+        </a>
+        <a href="customer.html" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Customer Account & Orders">
+            <i class="fa-solid fa-user"></i> Customer
+        </a>
+        <a href="admin.html" target="_blank" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Admin Dashboard">
+            <i class="fa-solid fa-shield-halved"></i> Admin
+        </a>
+    </nav>
+
+    <!-- Floating WhatsApp Action -->
+    <a href="javascript:void(0)" class="whatsapp-floating-btn" onclick="openWhatsAppSupport()" title="Chat with Husnain Fashion Stylist on WhatsApp" aria-label="WhatsApp Support">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ====================================================================
+         Luxury Footer
+         ==================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-logo">
+                        <div class="logo-crest">HF</div>
+                        <div class="brand-text">
+                            <span class="brand-name">HUSNAIN <span>FASHION</span></span>
+                            <span class="brand-sub">EST. LAHORE • KARACHI</span>
+                        </div>
+                    </a>
+                    <p>Pakistan's hallmark menswear house specializing in bespoke tailoring, luxury winter coats, and refined summer essentials crafted from the world's most luxurious fabrics.</p>
+                    <div class="footer-socials">
+                        <a href="javascript:void(0)" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="javascript:void(0)" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="javascript:void(0)" class="social-link" onclick="openWhatsAppSupport()" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Shirts Categories -->
+                <div class="footer-column">
+                    <h4>Men's Shirts</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('shirts', 'casual-shirts')">Casual Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('shirts', 'formal-shirts')">Formal Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('shirts', 'polo-shirts')">Polo Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('shirts', 'cotton-shirts')">Cotton Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('shirts', 'printed-shirts')">Printed Shirts</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Trousers & Winter -->
+                <div class="footer-column">
+                    <h4>Trousers & Coats</h4>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('trousers', 'formal-trousers')">Formal Trousers</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('trousers', 'chinos')">Tailored Chinos</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('trousers', 'jeans')">Denim Jeans</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'wool-coats')">Pure Wool Coats</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'blazers')">Tailored Blazers</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('coats-winter', 'jackets')">Leather & Suede Jackets</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact & Flagship Boutiques -->
+                <div class="footer-column">
+                    <h4>Customer Care & Boutiques</h4>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+92 300 4876246 (0300-HUSNAIN)</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>concierge@husnainfashion.pk</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span><strong>Lahore:</strong> Sector Y, DHA Phase 5 Commercial</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span><strong>Karachi:</strong> Dolmen Mall Clifton, Level 2</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Mon – Sun: 11:00 AM – 11:00 PM PST</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom: Payment & Copyright -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 <strong>HUSNAIN FASHION</strong>. All Rights Reserved. Nationwide Delivery Across Pakistan.</p>
+                <div class="payment-methods">
+                    <span class="payment-badge"><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery (COD)</span>
+                    <span class="payment-badge"><i class="fa-solid fa-mobile-screen"></i> JazzCash</span>
+                    <span class="payment-badge"><i class="fa-solid fa-wallet"></i> EasyPaisa</span>
+                    <span class="payment-badge"><i class="fa-brands fa-cc-visa"></i> Visa</span>
+                    <span class="payment-badge"><i class="fa-brands fa-cc-mastercard"></i> Mastercard</span>
+                    <span class="payment-badge">PayPak</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ====================================================================
+         Shared Drawer Backdrop Overlay
+         ==================================================================== -->
+    <div class="modal-overlay" id="drawerOverlay" onclick="closeAllDrawers()"></div>
+
+    <!-- ====================================================================
+         Shopping Cart Drawer
+         ==================================================================== -->
+    <aside class="drawer" id="cartDrawer" aria-label="Shopping Bag">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping text-gold"></i> Shopping Bag</h3>
+            <button class="modal-close-btn" onclick="toggleCartDrawer(false)" aria-label="Close Bag">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Free Delivery Progress Bar -->
+        <div class="shipping-progress-container">
+            <div class="shipping-progress-text" id="shippingProgressText">
+                <span>Add <strong>Rs. 5,000</strong> for <strong>FREE Home Delivery</strong></span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="shippingProgressFill"></div>
+            </div>
+        </div>
+
+        <!-- Bundle Discount Banner -->
+        <div class="bundle-banner" id="cartBundleBanner" style="display: none;"></div>
+
+        <!-- Cart Items List -->
+        <div class="drawer-items" id="cartDrawerItems"></div>
+
+        <!-- Empty Cart Notice -->
+        <div class="empty-cart-state" id="cartEmptyState" style="display: none;">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <h4>Your Bag is Empty</h4>
+            <p>Explore our Summer & Winter garments and add your favorite cuts to the bag.</p>
+            <button class="btn btn-gold btn-sm" onclick="toggleCartDrawer(false)">Start Shopping</button>
+        </div>
+
+        <!-- Cart Footer & Calculation -->
+        <div class="drawer-footer" id="cartDrawerFooter">
+            <!-- Promo Code Input -->
+            <div class="coupon-row">
+                <input type="text" id="couponCodeInput" placeholder="Promo code (WINTER20, HUSNAIN10)">
+                <button class="btn btn-dark btn-sm" onclick="applyCouponCode()">Apply</button>
+            </div>
+
+            <!-- Financial Calculations -->
+            <div class="cart-calc-rows">
+                <div class="calc-row">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">Rs. 0</span>
+                </div>
+                <div class="calc-row discount-row" id="cartDiscountRow" style="display: none;">
+                    <span>Discounts Applied</span>
+                    <span id="cartDiscount">- Rs. 0</span>
+                </div>
+                <div class="calc-row">
+                    <span>Delivery Fee (Nationwide)</span>
+                    <span id="cartDelivery">Rs. 250</span>
+                </div>
+                <div class="calc-row total-row">
+                    <span>Grand Total</span>
+                    <span id="cartGrandTotal">Rs. 0</span>
+                </div>
+            </div>
+
+            <button class="btn btn-gold btn-block" onclick="openCheckoutModal()">
+                <i class="fa-solid fa-lock"></i> Proceed to Checkout (COD)
+            </button>
+        </div>
+    </aside>
+
+    <!-- ====================================================================
+         Wishlist Drawer
+         ==================================================================== -->
+    <aside class="drawer" id="wishlistDrawer" aria-label="Saved Wishlist">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-heart text-gold"></i> Saved Wishlist</h3>
+            <button class="modal-close-btn" onclick="toggleWishlistDrawer(false)" aria-label="Close Wishlist">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-items" id="wishlistItemsList"></div>
+
+        <div class="empty-cart-state" id="wishlistEmptyState" style="display: none;">
+            <i class="fa-regular fa-heart"></i>
+            <h4>Your Wishlist is Empty</h4>
+            <p>Save items you love by clicking the heart icon on any design.</p>
+            <button class="btn btn-gold btn-sm" onclick="toggleWishlistDrawer(false)">Explore Collection</button>
+        </div>
+    </aside>
+
+    <!-- ====================================================================
+         Product Quick View Modal
+         ==================================================================== -->
+    <div class="modal-overlay" id="quickViewModal">
+        <div class="modal-box quick-view-box">
+            <button class="modal-close-btn" onclick="closeModal('quickViewModal')" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="qv-grid">
+                <!-- Gallery -->
+                <div class="qv-gallery">
+                    <div class="qv-main-image">
+                        <img src="" alt="Garment Preview" id="qvMainImg">
+                    </div>
+                    <div class="qv-thumbs" id="qvThumbs"></div>
+                </div>
+
+                <!-- Info -->
+                <div class="qv-info">
+                    <span class="section-subtitle" id="qvCategoryBadge">Husnain Signature</span>
+                    <h2 class="qv-title" id="qvTitle">Product Title</h2>
+
+                    <div class="qv-pricing">
+                        <span class="qv-price-current" id="qvCurrentPrice">Rs. 0</span>
+                        <span class="qv-price-original" id="qvOriginalPrice">Rs. 0</span>
+                    </div>
+
+                    <p class="qv-desc" id="qvDesc">Product description goes here.</p>
+
+                    <!-- Fabric Specs Table -->
+                    <div class="qv-specs-table">
+                        <div class="qv-spec-item">
+                            <strong>Fabric</strong>
+                            <span id="qvFabric">-</span>
+                        </div>
+                        <div class="qv-spec-item">
+                            <strong>Cut / Silhouette</strong>
+                            <span id="qvFit">-</span>
+                        </div>
+                        <div class="qv-spec-item">
+                            <strong>Care Notes</strong>
+                            <span id="qvCare">-</span>
+                        </div>
+                        <div class="qv-spec-item">
+                            <strong>Delivery in Pakistan</strong>
+                            <span>24–48 Hours (TCS/COD)</span>
+                        </div>
+                    </div>
+
+                    <!-- Color Selector -->
+                    <div class="qv-selector-group">
+                        <div class="qv-selector-title">
+                            <span>Color: <strong id="qvColorLabel" style="color: var(--color-gold);">Color</strong></span>
+                        </div>
+                        <div class="qv-color-swatches" id="qvColors"></div>
+                    </div>
+
+                    <!-- Size Selector -->
+                    <div class="qv-selector-group">
+                        <div class="qv-selector-title">
+                            <span>Select Size</span>
+                            <span class="btn-size-chart-link" onclick="openModal('sizeGuideModal')">
+                                <i class="fa-solid fa-ruler"></i> Size Guide
+                            </span>
+                        </div>
+                        <div class="qv-size-selector" id="qvSizes"></div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="qv-actions-row">
+                        <button class="btn btn-outline" onclick="addQVToCart()">
+                            <i class="fa-solid fa-bag-shopping"></i> Add to Bag
+                        </button>
+                        <button class="btn btn-gold" onclick="buyQVNow()">
+                            Instant Checkout (COD)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         Multi-Step Checkout Modal (Pakistani Cities & COD / Wallets)
+         ==================================================================== -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-box checkout-box">
+            <button class="modal-close-btn" onclick="closeModal('checkoutModal')" aria-label="Close Checkout">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Stepper Progress Header -->
+            <div class="checkout-stepper-header">
+                <div class="co-step active" id="stepIndicator1">
+                    <span class="co-step-num">1</span>
+                    <span>Contact Info</span>
+                </div>
+                <div class="co-step" id="stepIndicator2">
+                    <span class="co-step-num">2</span>
+                    <span>Shipping Address</span>
+                </div>
+                <div class="co-step" id="stepIndicator3">
+                    <span class="co-step-num">3</span>
+                    <span>Payment Mode</span>
+                </div>
+            </div>
+
+            <!-- Order Financial Summary Pill -->
+            <div style="background: #0f0f13; border: 1px solid rgba(197,160,89,0.25); border-radius: var(--radius-sm); padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Order Total (<span id="coItemsCount">0 items</span>)</span>
+                    <h4 style="color: var(--color-gold-bright); font-size: 1.2rem; font-weight: 800;" id="coGrandTotal">Rs. 0</h4>
+                </div>
+                <div style="text-align: right; font-size: 0.78rem; color: var(--color-beige);">
+                    <div>Delivery: <strong id="coDelivery" style="color: #2ecc71;">FREE</strong></div>
+                    <div>Discount: <span id="coDiscount" style="color: var(--color-gold-light);">Rs. 0</span></div>
+                </div>
+            </div>
+
+            <!-- Step 1: Customer Contact Info -->
+            <div id="coStep1">
+                <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                    1. Contact Details
+                </h4>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="checkoutName">Full Name *</label>
+                        <input type="text" id="checkoutName" placeholder="e.g. Arslan Tariq" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutPhone">Pakistani Mobile Number (for Courier SMS & COD Verification) *</label>
+                        <input type="tel" id="checkoutPhone" placeholder="e.g. 0300 1234567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutEmail">Email Address (for Digital Invoice) *</label>
+                        <input type="email" id="checkoutEmail" placeholder="e.g. arslan@example.com" required>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+                    <button class="btn btn-gold" onclick="validateAndProceedStep1()">
+                        Proceed to Address <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Shipping Address Across Pakistan -->
+            <div id="coStep2" style="display: none;">
+                <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                    2. Delivery Address in Pakistan
+                </h4>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="checkoutAddress">Street Address / House / Flat / Society *</label>
+                        <input type="text" id="checkoutAddress" placeholder="e.g. House #14-B, Street 5, DHA Phase 6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutCity">Destination City in Pakistan *</label>
+                        <select id="checkoutCity" class="filter-select" required>
+                            <option value="">Select your city</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutPostal">Postal / ZIP Code</label>
+                        <input type="text" id="checkoutPostal" placeholder="e.g. 54000">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="checkoutNotes">Delivery Notes / Landmark (Optional)</label>
+                        <input type="text" id="checkoutNotes" placeholder="e.g. Near Jalal Sons or Main Market">
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-outline btn-sm" onclick="showCheckoutStep(1)">
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn btn-gold" onclick="validateAndProceedStep2()">
+                        Proceed to Payment <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Payment Options (COD, JazzCash, EasyPaisa, Card) -->
+            <div id="coStep3" style="display: none;">
+                <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                    3. Select Payment Method
+                </h4>
+
+                <div class="payment-selector-group">
+                    <!-- COD (Default) -->
+                    <label class="payment-opt-card selected" onclick="selectPaymentOpt(this)">
+                        <input type="radio" name="paymentMethod" value="Cash on Delivery (COD)" checked>
+                        <div class="payment-opt-info">
+                            <h5><i class="fa-solid fa-hand-holding-dollar text-gold"></i> Cash on Delivery (COD)</h5>
+                            <p>Pay with cash directly to the TCS / Leopards courier rider at your doorstep upon receiving the parcel.</p>
+                        </div>
+                    </label>
+
+                    <!-- JazzCash / EasyPaisa -->
+                    <label class="payment-opt-card" onclick="selectPaymentOpt(this)">
+                        <input type="radio" name="paymentMethod" value="JazzCash / EasyPaisa">
+                        <div class="payment-opt-info">
+                            <h5><i class="fa-solid fa-mobile-screen-button text-gold"></i> JazzCash / EasyPaisa Mobile Wallet</h5>
+                            <p>Instant mobile account transfer. Details will be messaged to your phone number.</p>
+                        </div>
+                    </label>
+
+                    <!-- Credit / Debit Card -->
+                    <label class="payment-opt-card" onclick="selectPaymentOpt(this)">
+                        <input type="radio" name="paymentMethod" value="Credit or Debit Card">
+                        <div class="payment-opt-info">
+                            <h5><i class="fa-solid fa-credit-card text-gold"></i> Visa / Mastercard / PayPak</h5>
+                            <p>Secure 128-bit SSL encrypted card transaction powered by Bank Alfalah & 1Link.</p>
+                        </div>
+                    </label>
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
+                    <button class="btn btn-outline btn-sm" onclick="showCheckoutStep(2)">
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <button class="btn btn-gold" onclick="placeFinalOrder()">
+                        <i class="fa-solid fa-circle-check"></i> Place Order Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         Order Success & Invoice Receipt Modal
+         ==================================================================== -->
+    <div class="modal-overlay" id="orderSuccessModal">
+        <div class="modal-box order-success-box">
+            <div class="order-success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3>Thank You for Your Order!</h3>
+            <p>Your order has been confirmed by <strong>HUSNAIN FASHION</strong>. A confirmation SMS and digital invoice have been dispatched to your mobile.</p>
+
+            <div class="order-tracking-pill">
+                <span>Your Real-Time Consignment Tracking Code:</span>
+                <code id="successTrackingCode">HF-PK-8921</code>
+            </div>
+
+            <div style="background: #0f0f13; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 1.25rem; max-width: 440px; margin: 0 auto 2rem; text-align: left; font-size: 0.85rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="color: var(--color-text-muted);">Customer:</span>
+                    <strong style="color: #fff;" id="successCustomerName">Arslan Tariq</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="color: var(--color-text-muted);">Destination:</span>
+                    <span style="color: #fff;" id="successCity">DHA, Lahore</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="color: var(--color-text-muted);">Payment:</span>
+                    <span style="color: #2ecc71;" id="successPaymentMethod">Cash on Delivery</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding-top: 0.4rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <span style="color: var(--color-gold);">Grand Total:</span>
+                    <strong style="color: var(--color-gold-bright);" id="successTotal">Rs. 0</strong>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-gold" onclick="trackNewlyCreatedOrder()">
+                    <i class="fa-solid fa-truck-fast"></i> Track Order Live
+                </button>
+                <button class="btn btn-outline" onclick="closeModal('orderSuccessModal')">
+                    Continue Shopping
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         Size Guide Modal (Inches & CM Pakistani Standards)
+         ==================================================================== -->
+    <div class="modal-overlay" id="sizeGuideModal">
+        <div class="modal-box size-guide-box">
+            <button class="modal-close-btn" onclick="closeModal('sizeGuideModal')" aria-label="Close Size Guide">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <span class="section-subtitle">Precision Fit</span>
+                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.8rem;">Husnain Fashion Sizing Chart</h3>
+                <p style="color: var(--color-text-muted); font-size: 0.85rem;">All measurements are in Inches. Designed specifically for authentic Pakistani gentleman proportions.</p>
+            </div>
+
+            <h5 style="color: var(--color-gold); font-size: 0.95rem; text-transform: uppercase;">1. Shirts Sizing (Inches)</h5>
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Collar</th>
+                        <th>Chest</th>
+                        <th>Shoulder</th>
+                        <th>Sleeve</th>
+                        <th>Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>S</strong></td><td>14.5"</td><td>38"</td><td>17.5"</td><td>24.5"</td><td>29"</td></tr>
+                    <tr><td><strong>M</strong></td><td>15.5"</td><td>40"</td><td>18.5"</td><td>25.0"</td><td>30"</td></tr>
+                    <tr><td><strong>L</strong></td><td>16.5"</td><td>43"</td><td>19.5"</td><td>25.5"</td><td>31"</td></tr>
+                    <tr><td><strong>XL</strong></td><td>17.5"</td><td>46"</td><td>20.5"</td><td>26.0"</td><td>32"</td></tr>
+                    <tr><td><strong>XXL</strong></td><td>18.5"</td><td>49"</td><td>21.5"</td><td>26.5"</td><td>33"</td></tr>
+                </tbody>
+            </table>
+
+            <h5 style="color: var(--color-gold); font-size: 0.95rem; text-transform: uppercase; margin-top: 1.5rem;">2. Trousers & Chinos Sizing (Inches)</h5>
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Waist (Inches)</th>
+                        <th>Hip</th>
+                        <th>Thigh</th>
+                        <th>Inseam Length</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>S</strong></td><td>30" - 31"</td><td>38"</td><td>23"</td><td>32"</td></tr>
+                    <tr><td><strong>M</strong></td><td>32" - 33"</td><td>40"</td><td>24"</td><td>32"</td></tr>
+                    <tr><td><strong>L</strong></td><td>34" - 35"</td><td>42"</td><td>25"</td><td>32.5"</td></tr>
+                    <tr><td><strong>XL</strong></td><td>36" - 37"</td><td>45"</td><td>26"</td><td>33"</td></tr>
+                    <tr><td><strong>XXL</strong></td><td>38" - 40"</td><td>48"</td><td>27.5"</td><td>33"</td></tr>
+                </tbody>
+            </table>
+
+            <div style="background: rgba(197,160,89,0.1); border-left: 3px solid var(--color-gold); padding: 0.85rem 1rem; border-radius: var(--radius-sm); font-size: 0.82rem; color: var(--color-beige);">
+                <i class="fa-solid fa-circle-info" style="color: var(--color-gold); margin-right: 6px;"></i>
+                <strong>Need custom tailoring?</strong> Contact our master tailor on WhatsApp at <strong>+92 300 4876246</strong> with your exact measurements.
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         User Login / Signup Modal (Complete Authentication with Salted Hash)
+         ==================================================================== -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box" style="max-width: 460px; padding: 2.5rem;">
+            <button class="modal-close-btn" onclick="closeModal('authModal')" aria-label="Close Auth">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div class="logo-crest" style="margin: 0 auto 0.75rem;">HF</div>
+                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.6rem;">Member Portal</h3>
+                <p style="color: var(--color-text-muted); font-size: 0.85rem;">Access your Pakistani orders, measurements & wishlist</p>
+            </div>
+
+            <!-- Login vs Signup Switcher -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: #0f0f13; padding: 4px; border-radius: var(--radius-sm);">
+                <button class="btn btn-sm btn-gold" id="modalTabLogin" style="flex: 1;" onclick="switchAuthModalTab('login')">Sign In</button>
+                <button class="btn btn-sm btn-dark" id="modalTabSignup" style="flex: 1;" onclick="switchAuthModalTab('signup')">Create Account</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <form id="storefrontLoginForm" onsubmit="handleLoginSubmit(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="form-group">
+                    <label for="authEmail">Email Address *</label>
+                    <input type="email" id="authEmail" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="authPassword">Password *</label>
+                    <div class="password-input-wrap">
+                        <input type="password" id="authPassword" placeholder="••••••••" required>
+                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('authPassword', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: flex-end; font-size: 0.78rem; color: var(--color-text-muted);">
+                    <a href="customer.html" style="color: var(--color-gold); text-decoration: underline;">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block" style="margin-top: 0.5rem;">
+                    <i class="fa-solid fa-lock-open"></i> Sign In to Account
+                </button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="storefrontSignupForm" onsubmit="handleSignupSubmit(event)" style="display: none; flex-direction: column; gap: 0.85rem;">
+                <div class="form-group">
+                    <label for="signupName">Full Name *</label>
+                    <input type="text" id="signupName" placeholder="e.g. Arslan Tariq" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address *</label>
+                    <input type="email" id="signupEmail" placeholder="arslan@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPhone">Mobile Number (Pakistan) *</label>
+                    <input type="tel" id="signupPhone" placeholder="0300 1234567" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupCity">City</label>
+                    <input type="text" id="signupCity" placeholder="Lahore / Karachi / Islamabad">
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password (Min 6 chars) *</label>
+                    <div class="password-input-wrap">
+                        <input type="password" id="signupPassword" placeholder="••••••••" required>
+                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('signupPassword', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password *</label>
+                    <div class="password-input-wrap">
+                        <input type="password" id="signupConfirmPassword" placeholder="••••••••" required>
+                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('signupConfirmPassword', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block" style="margin-top: 0.5rem;">
+                    <i class="fa-solid fa-user-plus"></i> Complete Registration
+                </button>
+            </form>
+
+            <div style="text-align: center; margin-top: 1.5rem; font-size: 0.82rem; color: var(--color-text-muted); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem;">
+                <span>Shop Owner or Manager? </span>
+                <a href="admin.html" target="_blank" style="color: var(--color-gold); font-weight: 700;">Open Admin Dashboard ↗</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         Write a Review Modal
+         ==================================================================== -->
+    <div class="modal-overlay" id="reviewModal">
+        <div class="modal-box" style="max-width: 520px; padding: 2.5rem;">
+            <button class="modal-close-btn" onclick="closeModal('reviewModal')" aria-label="Close Review">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <span class="section-subtitle">Your Experience</span>
+                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.6rem;">Review Husnain Fashion</h3>
+            </div>
+
+            <form onsubmit="submitNewReview(event)" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div class="form-group">
+                    <label for="reviewName">Your Name *</label>
+                    <input type="text" id="reviewName" placeholder="e.g. Bilal Ahmed" required>
+                </div>
+                <div class="form-group">
+                    <label for="reviewCity">Your City in Pakistan *</label>
+                    <input type="text" id="reviewCity" placeholder="e.g. Karachi / Lahore / Islamabad" required>
+                </div>
+                <div class="form-group">
+                    <label for="reviewRating">Rating</label>
+                    <select id="reviewRating" class="filter-select">
+                        <option value="5">★★★★★ (5 Stars - Exceptional)</option>
+                        <option value="4.5">★★★★½ (4.5 Stars - Great)</option>
+                        <option value="4">★★★★☆ (4 Stars - Good)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reviewTitle">Review Title *</label>
+                    <input type="text" id="reviewTitle" placeholder="e.g. Impeccable tailoring and rapid delivery" required>
+                </div>
+                <div class="form-group">
+                    <label for="reviewComment">Detailed Review *</label>
+                    <textarea id="reviewComment" rows="3" placeholder="Tell other Pakistani gentlemen about the fabric, sizing, and comfort..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block" style="margin-top: 0.5rem;">Submit Verified Review</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript Files -->
+    <script src="js/products.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Additional UI micro-interactions
+        function selectPaymentOpt(element) {
+            document.querySelectorAll('.payment-opt-card').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function toggleMobileNav() {
+            const nav = document.querySelector('.nav-menu');
+            if (nav) {
+                if (nav.style.display === 'flex') {
+                    nav.style.display = 'none';
+                } else {
+                    nav.style.display = 'flex';
+                    nav.style.flexDirection = 'column';
+                    nav.style.position = 'absolute';
+                    nav.style.top = '100%';
+                    nav.style.left = '0';
+                    nav.style.right = '0';
+                    nav.style.background = '#141418';
+                    nav.style.padding = '1.5rem';
+                    nav.style.borderBottom = '1px solid var(--color-gold)';
+                    nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.8)';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+

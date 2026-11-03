@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUSNAIN FASHION — Executive Admin Dashboard</title>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Admin Stylesheet -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- ====================================================================
+         Admin Login Gate Screen (Shown if not authenticated as Admin)
+         ==================================================================== -->
+    <div class="admin-login-screen" id="adminLoginScreen">
+        <div class="admin-login-box">
+            <div class="sidebar-crest" style="margin: 0 auto 1.25rem; width: 56px; height: 56px; font-size: 1.5rem;">HF</div>
+            <h2 style="font-family: 'Cinzel', serif; color: #fff; font-size: 1.6rem; margin-bottom: 0.35rem;">Husnain Admin</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem;">Authorized Personnel Only • Secure Portal</p>
+
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="form-group" style="text-align: left; margin-bottom: 1.25rem;">
+                    <label for="adminEmail">Administrator Email</label>
+                    <input type="email" id="adminEmail" value="admin@husnainfashion.pk" required>
+                </div>
+
+                <div class="form-group" style="text-align: left; margin-bottom: 1.75rem;">
+                    <label for="adminPassword">Secret Password</label>
+                    <div class="password-input-wrap">
+                        <input type="password" id="adminPassword" value="HusnainAdmin2026!" required>
+                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('adminPassword', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; padding: 0.85rem;">
+                    <i class="fa-solid fa-lock-open"></i> Authenticate Dashboard
+                </button>
+            </form>
+
+            <div style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-muted);">
+                <p>Default Admin: <code style="color: var(--gold-light);">admin@husnainfashion.pk</code></p>
+                <p>Default Pass: <code style="color: var(--gold-light);">HusnainAdmin2026!</code></p>
+                <a href="index.html" style="color: var(--gold-primary); text-decoration: none; display: inline-block; margin-top: 0.75rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Return to Public Store
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         Main Admin Dashboard Layout
+         ==================================================================== -->
+    <div class="admin-wrapper" id="adminDashboardApp" style="display: none;">
+        <!-- Left Sidebar Navigation -->
+        <aside class="admin-sidebar">
+            <a href="admin.html" class="sidebar-brand">
+                <div class="sidebar-crest">HF</div>
+                <div class="sidebar-brand-text">
+                    <h3>HUSNAIN <span>ADMIN</span></h3>
+                    <span>STORE MANAGEMENT</span>
+                </div>
+            </a>
+
+            <nav class="sidebar-nav">
+                <span class="nav-category-title">Core Management</span>
+                <a class="sidebar-item active" onclick="switchAdminTab('overviewTab', this)">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard Overview
+                </a>
+                <a class="sidebar-item" onclick="switchAdminTab('productsTab', this)">
+                    <i class="fa-solid fa-shirt"></i> Products Catalog
+                </a>
+                <a class="sidebar-item" onclick="switchAdminTab('offersTab', this)">
+                    <i class="fa-solid fa-tags"></i> Special Offers & Deals
+                </a>
+                <a class="sidebar-item" onclick="switchAdminTab('ordersTab', this)">
+                    <i class="fa-solid fa-box-open"></i> Customer Orders
+                </a>
+                <a class="sidebar-item" onclick="switchAdminTab('customersTab', this)">
+                    <i class="fa-solid fa-users"></i> Registered Customers
+                </a>
+
+                <span class="nav-category-title">Storefront Navigation</span>
+                <a href="index.html" class="sidebar-item" target="_blank">
+                    <i class="fa-solid fa-store"></i> View Live Store ↗
+                </a>
+                <a href="customer.html" class="sidebar-item" target="_blank">
+                    <i class="fa-solid fa-user-circle"></i> Customer Portal ↗
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="admin-profile-pill">
+                    <div class="admin-avatar">A</div>
+                    <div class="admin-info">
+                        <h5 id="adminProfileName">Husnain Admin</h5>
+                        <span>Super Administrator</span>
+                    </div>
+                </div>
+                <button class="btn-sidebar-logout" onclick="adminLogout()" title="Log out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content View -->
+        <main class="admin-main">
+            <!-- Top Bar -->
+            <header class="admin-topbar">
+                <div class="page-title-wrap">
+                    <h1 id="tabHeaderTitle">Overview & Analytics</h1>
+                    <p id="tabHeaderSubtitle">Real-time revenue, order metrics and inventory status</p>
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn-gold btn-sm" onclick="openAddProductModal()">
+                        <i class="fa-solid fa-plus"></i> Add Product
+                    </button>
+                    <button class="btn-outline btn-sm" onclick="openAddOfferModal()">
+                        <i class="fa-solid fa-percent"></i> New Offer
+                    </button>
+                </div>
+            </header>
+
+            <!-- ================================================================
+                 TAB 1: Dashboard Overview & KPI Metrics
+                 ================================================================ -->
+            <section class="admin-tab-pane active" id="overviewTab">
+                <!-- KPI Grid -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-text">
+                            <span>Total Revenue (PKR)</span>
+                            <h3 id="kpiRevenue">Rs. 0</h3>
+                        </div>
+                        <div class="kpi-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-text">
+                            <span>Total Orders Placed</span>
+                            <h3 id="kpiOrders">0</h3>
+                        </div>
+                        <div class="kpi-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-text">
+                            <span>Active Products</span>
+                            <h3 id="kpiProducts">0</h3>
+                        </div>
+                        <div class="kpi-icon"><i class="fa-solid fa-shirt"></i></div>
+                    </div>
+                    <div class="kpi-card" onclick="switchAdminTab('customersTab', document.querySelectorAll('.sidebar-item')[4])" style="cursor: pointer;" title="Click to view all registered customers">
+                        <div class="kpi-text">
+                            <span>Registered Customers</span>
+                            <h3 id="kpiCustomers">0</h3>
+                        </div>
+                        <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders Preview -->
+                <div class="content-card">
+                    <div class="card-header-bar">
+                        <h3>Recent Customer Orders</h3>
+                        <button class="btn-outline btn-sm" onclick="switchAdminTab('ordersTab', document.querySelectorAll('.sidebar-item')[3])">
+                            View All Orders <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="admin-table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Destination City</th>
+                                    <th>Grand Total</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overviewRecentOrdersTable">
+                                <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Loading recent orders...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================================
+                 TAB 2: Products Catalog Management
+                 ================================================================ -->
+            <section class="admin-tab-pane" id="productsTab">
+                <div class="content-card">
+                    <div class="card-header-bar">
+                        <div>
+                            <h3>Product Inventory (Shirts, Trousers, Coats & Jackets)</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Manage Pakistani Rupee pricing, color palettes, sizing and seasonal collections.</p>
+                        </div>
+                        <button class="btn-gold" onclick="openAddProductModal()">
+                            <i class="fa-solid fa-plus"></i> Add New Product
+                        </button>
+                    </div>
+
+                    <!-- Category & Season Filter Bar -->
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                        <input type="text" id="adminProductSearch" placeholder="Search by product name or ID..." style="flex: 1; min-width: 240px;" oninput="filterAdminProducts()">
+                        <select id="adminCategoryFilter" onchange="filterAdminProducts()" style="min-width: 180px;">
+                            <option value="all">All Categories</option>
+                            <option value="shirts">Shirts</option>
+                            <option value="trousers">Trousers</option>
+                            <option value="coats-winter">Coats & Winter</option>
+                        </select>
+                        <select id="adminSeasonFilter" onchange="filterAdminProducts()" style="min-width: 160px;">
+                            <option value="all">All Seasons</option>
+                            <option value="summer">Summer ☀️</option>
+                            <option value="winter">Winter ❄️</option>
+                        </select>
+                    </div>
+
+                    <!-- Products Table -->
+                    <div class="admin-table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product ID & Name</th>
+                                    <th>Category & Subcategory</th>
+                                    <th>Season</th>
+                                    <th>Price (PKR)</th>
+                                    <th>Colors</th>
+                                    <th>Sizes</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminProductsTableBody">
+                                <tr><td colspan="9" style="text-align: center; color: var(--text-muted);">Loading catalog...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================================
+                 TAB 3: Special Offers & Discounts Management
+                 ================================================================ -->
+            <section class="admin-tab-pane" id="offersTab">
+                <div class="content-card">
+                    <div class="card-header-bar">
+                        <div>
+                            <h3>Promotional Offers, Bundles & Coupons</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Create Buy 1 Get 1 Free, Buy 2 10% OFF, Buy 3 20% OFF, Free Delivery & coupon codes.</p>
+                        </div>
+                        <button class="btn-gold" onclick="openAddOfferModal()">
+                            <i class="fa-solid fa-plus"></i> Create New Offer
+                        </button>
+                    </div>
+
+                    <!-- Offers Table -->
+                    <div class="admin-table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Offer Title & Description</th>
+                                    <th>Type</th>
+                                    <th>Discount %</th>
+                                    <th>Scope</th>
+                                    <th>Validity Period</th>
+                                    <th>Active Toggle</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOffersTableBody">
+                                <tr><td colspan="8" style="text-align: center; color: var(--text-muted);">Loading promotional offers...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================================
+                 TAB 4: Customer Orders & Logistics Management
+                 ================================================================ -->
+            <section class="admin-tab-pane" id="ordersTab">
+                <div class="content-card">
+                    <div class="card-header-bar">
+                        <div>
+                            <h3>Customer Orders Across Pakistan</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Track delivery statuses, COD payments and dispatch consignments via TCS / Leopards.</p>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <select id="adminOrderStatusFilter" onchange="filterAdminOrders()" style="min-width: 180px;">
+                                <option value="all">All Statuses</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Dispatched">Dispatched</option>
+                                <option value="Delivered">Delivered</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Orders Table -->
+                    <div class="admin-table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer & Contact</th>
+                                    <th>City & Address</th>
+                                    <th>Garments Ordered</th>
+                                    <th>Grand Total</th>
+                                    <th>Payment Mode</th>
+                                    <th>Status</th>
+                                    <th>Courier</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrdersTableBody">
+                                <tr><td colspan="9" style="text-align: center; color: var(--text-muted);">Loading orders...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================================================================
+                 TAB 5: Registered Customers Management
+                 ================================================================ -->
+            <section class="admin-tab-pane" id="customersTab">
+                <div class="content-card">
+                    <div class="card-header-bar">
+                        <div>
+                            <h3>Registered Store Customers</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Real customer registrations, contact numbers, order counts and total spend.</p>
+                        </div>
+                        <input type="text" id="adminCustomerSearch" placeholder="Search by customer name, email or city..." style="min-width: 260px;" oninput="filterAdminCustomers()">
+                    </div>
+
+                    <!-- Customers Table -->
+                    <div class="admin-table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email Address</th>
+                                    <th>Contact Phone</th>
+                                    <th>City / Destination</th>
+                                    <th>Total Orders</th>
+                                    <th>Total Spend (PKR)</th>
+                                    <th>Registration Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminCustomersTableBody">
+                                <tr><td colspan="8" style="text-align: center; color: var(--text-muted);">Loading registered customers...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ====================================================================
+         MODAL: Add / Edit Product
+         ==================================================================== -->
+    <div class="admin-modal-overlay" id="productModal">
+        <div class="admin-modal-box">
+            <button class="admin-modal-close" onclick="closeAdminModal('productModal')">&times;</button>
+            <h3 id="productModalTitle" style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 1.5rem;">Add New Garment</h3>
+
+            <form id="productForm" onsubmit="saveProduct(event)">
+                <input type="hidden" id="prodEditId">
+
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="prodName">Product Title *</label>
+                        <input type="text" id="prodName" placeholder="e.g. Imperial Oxford Casual Shirt" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodCategory">Category *</label>
+                        <select id="prodCategory" onchange="updateSubCategories()" required>
+                            <option value="shirts">Shirts</option>
+                            <option value="trousers">Trousers</option>
+                            <option value="coats-winter">Coats & Winter</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodSubCategory">Subcategory *</label>
+                        <select id="prodSubCategory" required>
+                            <!-- Dynamically populated based on category -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodSeason">Season *</label>
+                        <select id="prodSeason" required>
+                            <option value="summer">Summer ☀️</option>
+                            <option value="winter">Winter ❄️</option>
+                            <option value="all-season">All-Season</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodBadge">Discount Badge Text</label>
+                        <input type="text" id="prodBadge" placeholder="e.g. 20% OFF or BESTSELLER">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodOriginalPrice">Original Price (PKR) *</label>
+                        <input type="number" id="prodOriginalPrice" min="500" max="100000" placeholder="e.g. 3499" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodDiscountPrice">Discounted Selling Price (PKR) *</label>
+                        <input type="number" id="prodDiscountPrice" min="500" max="100000" placeholder="e.g. 2799" required>
+                    </div>
+
+                    <!-- Image Upload or URL -->
+                    <div class="form-group full-width">
+                        <label>Primary Image URL or File Upload *</label>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <input type="text" id="prodImageUrl" placeholder="https://images.unsplash.com/... or paste image link" style="flex: 1;" required>
+                            <label class="btn-outline btn-sm" style="cursor: pointer; display: flex; align-items: center;">
+                                <i class="fa-solid fa-upload"></i> Upload
+                                <input type="file" id="prodImageFile" accept="image/*" style="display: none;" onchange="handleImageFileUpload(this)">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Colors Selection -->
+                    <div class="form-group full-width">
+                        <label>Color Options (Click to add dynamic colors)</label>
+                        <div id="colorsListContainer" style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.5rem;"></div>
+                        <button type="button" class="btn-outline btn-sm" onclick="addColorRow('', '#111111')">
+                            <i class="fa-solid fa-plus"></i> Add Color Swatch
+                        </button>
+                    </div>
+
+                    <!-- Available Sizes -->
+                    <div class="form-group full-width">
+                        <label>Available Sizes *</label>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <label><input type="checkbox" name="prodSizes" value="S" checked> S</label>
+                            <label><input type="checkbox" name="prodSizes" value="M" checked> M</label>
+                            <label><input type="checkbox" name="prodSizes" value="L" checked> L</label>
+                            <label><input type="checkbox" name="prodSizes" value="XL" checked> XL</label>
+                            <label><input type="checkbox" name="prodSizes" value="XXL" checked> XXL</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="prodFabric">Fabric Composition</label>
+                        <input type="text" id="prodFabric" placeholder="e.g. 100% Breathable Egyptian Giza Cotton">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodFit">Fit / Cut</label>
+                        <input type="text" id="prodFit" placeholder="e.g. Slim Modern Fit">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prodCare">Care Instructions</label>
+                        <input type="text" id="prodCare" placeholder="e.g. Machine wash cold, dry clean recommended">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="prodDesc">Product Description</label>
+                        <textarea id="prodDesc" rows="3" placeholder="Describe the tailoring, drape, occasions..."></textarea>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn-outline" onclick="closeAdminModal('productModal')">Cancel</button>
+                    <button type="submit" class="btn-gold"><i class="fa-solid fa-floppy-disk"></i> Save Garment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         MODAL: Create / Edit Special Offer & Coupon
+         ==================================================================== -->
+    <div class="admin-modal-overlay" id="offerModal">
+        <div class="admin-modal-box">
+            <button class="admin-modal-close" onclick="closeAdminModal('offerModal')">&times;</button>
+            <h3 id="offerModalTitle" style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 1.5rem;">Create New Offer & Coupon</h3>
+
+            <form id="offerForm" onsubmit="saveOffer(event)">
+                <input type="hidden" id="offerEditId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="offerCode">Coupon Code (Uppercase) *</label>
+                        <input type="text" id="offerCode" placeholder="e.g. SUMMER20 or WINTER30" style="text-transform: uppercase;" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerType">Offer Type *</label>
+                        <select id="offerType" onchange="adjustOfferTypeFields()" required>
+                            <option value="percentage">Percentage Discount (10%, 20%, 30%, 50%)</option>
+                            <option value="bogo">Buy 1 Get 1 Free (BOGO)</option>
+                            <option value="buy2_10">Buy 2 Get 10% OFF</option>
+                            <option value="buy3_20">Buy 3 Get 20% OFF</option>
+                            <option value="free_shipping">Free Home Delivery Threshold</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="offerTitle">Offer Display Title *</label>
+                        <input type="text" id="offerTitle" placeholder="e.g. Summer Breeze 20% Discount" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerDiscountPercent">Discount Percentage (%)</label>
+                        <select id="offerDiscountPercent">
+                            <option value="10">10% OFF</option>
+                            <option value="20">20% OFF</option>
+                            <option value="30">30% OFF</option>
+                            <option value="50">50% OFF (Mega Sale)</option>
+                            <option value="0">0% (For Free Delivery / Custom)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerMinOrder">Minimum Order Amount (PKR)</label>
+                        <input type="number" id="offerMinOrder" value="0" min="0" placeholder="0 for no minimum">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerScope">Applicable Scope</label>
+                        <select id="offerScope">
+                            <option value="storewide">Storewide (All Garments)</option>
+                            <option value="shirts">Shirts Only</option>
+                            <option value="winter">Winter Collection Only</option>
+                            <option value="trousers">Trousers Only</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerStartDate">Start Date *</label>
+                        <input type="date" id="offerStartDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerExpiryDate">Expiry Date *</label>
+                        <input type="date" id="offerExpiryDate" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="offerDesc">Description for Customers</label>
+                        <input type="text" id="offerDesc" placeholder="e.g. Enjoy 20% off all summer linens and oxford shirts">
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn-outline" onclick="closeAdminModal('offerModal')">Cancel</button>
+                    <button type="submit" class="btn-gold"><i class="fa-solid fa-floppy-disk"></i> Save & Publish Offer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         MODAL: Order Details & Status Update
+         ==================================================================== -->
+    <div class="admin-modal-overlay" id="orderModal">
+        <div class="admin-modal-box">
+            <button class="admin-modal-close" onclick="closeAdminModal('orderModal')">&times;</button>
+            <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 0.5rem;">Order Details: <span id="viewOrderId" style="color: var(--gold-light);"></span></h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;" id="viewOrderDate"></p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; background: #0f0f14; padding: 1.25rem; border-radius: var(--radius-sm);">
+                <div>
+                    <h5 style="color: var(--gold-light); font-size: 0.82rem; text-transform: uppercase;">Consignee Information</h5>
+                    <p id="viewOrderCustomer" style="color: #fff; font-weight: 700; margin-top: 4px;"></p>
+                    <p id="viewOrderPhone" style="color: var(--text-muted); font-size: 0.85rem;"></p>
+                    <p id="viewOrderEmail" style="color: var(--text-muted); font-size: 0.85rem;"></p>
+                </div>
+                <div>
+                    <h5 style="color: var(--gold-light); font-size: 0.82rem; text-transform: uppercase;">Shipping Destination</h5>
+                    <p id="viewOrderAddress" style="color: #fff; font-size: 0.88rem; margin-top: 4px;"></p>
+                    <p id="viewOrderCity" style="color: var(--gold-primary); font-weight: 700;"></p>
+                </div>
+            </div>
+
+            <!-- Items List -->
+            <h5 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.75rem;">Garments Ordered</h5>
+            <div id="viewOrderItemsList" style="margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto;"></div>
+
+            <!-- Financials -->
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border-subtle); padding-top: 1rem; margin-bottom: 1.5rem; font-size: 0.95rem;">
+                <div>
+                    <span>Payment Mode: <strong id="viewOrderPayment" style="color: #2ecc71;"></strong></span>
+                </div>
+                <div style="text-align: right;">
+                    <div>Grand Total: <strong id="viewOrderTotal" style="color: var(--gold-bright); font-size: 1.3rem;"></strong></div>
+                </div>
+            </div>
+
+            <!-- Update Status Section -->
+            <div style="background: rgba(197,160,89,0.08); border: 1px solid var(--border-gold); border-radius: var(--radius-sm); padding: 1.25rem;">
+                <h5 style="color: var(--gold-light); margin-bottom: 0.75rem; font-size: 0.85rem; text-transform: uppercase;">Update Order & Courier Status</h5>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <select id="updateOrderStatusSelect" style="flex: 1;">
+                        <option value="Processing">Processing (At Tailoring Facility)</option>
+                        <option value="Dispatched">Dispatched (Handed over to TCS / Leopards)</option>
+                        <option value="Delivered">Delivered (COD Collected)</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <input type="text" id="updateOrderNote" placeholder="Tracking note (e.g. Rider Out in Gulberg)" style="flex: 2;">
+                    <button class="btn-gold" onclick="submitOrderStatusUpdate()">Update Status</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin JavaScript Engine -->
+    <script src="js/admin.js"></script>
+</body>
+</html>
+

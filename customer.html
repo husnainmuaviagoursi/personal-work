@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account — HUSNAIN FASHION</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .dashboard-wrapper {
+            padding: 3rem 0 6rem;
+            min-height: 80vh;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+        .dashboard-sidebar {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-md);
+            padding: 1.75rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .customer-card-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .customer-avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+            color: #0b0b0d;
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            box-shadow: 0 4px 15px var(--color-gold-glow);
+        }
+        .dash-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.85rem 1rem;
+            border-radius: var(--radius-sm);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+            text-align: left;
+            background: none;
+            width: 100%;
+        }
+        .dash-nav-btn:hover,
+        .dash-nav-btn.active {
+            background: rgba(197, 160, 89, 0.12);
+            color: #fff;
+            border-color: rgba(197, 160, 89, 0.3);
+        }
+        .dash-nav-btn i {
+            width: 20px;
+            color: var(--color-gold);
+        }
+        .dash-tab-content {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-md);
+            padding: 2.2rem;
+            min-height: 480px;
+        }
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+        .order-card-item {
+            background: #0f0f13;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s;
+        }
+        .order-card-item:hover {
+            border-color: rgba(197, 160, 89, 0.4);
+        }
+        .address-card {
+            background: #0f0f13;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-sm);
+            padding: 1.25rem;
+            position: relative;
+        }
+        .address-card.is-default {
+            border-color: var(--color-gold);
+        }
+        @media (max-width: 860px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-crest">HF</div>
+                <div class="brand-text">
+                    <span class="brand-name">HUSNAIN <span>FASHION</span></span>
+                    <span class="brand-sub">CUSTOMER PORTAL</span>
+                </div>
+            </a>
+
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-outline btn-sm">
+                    <i class="fa-solid fa-store"></i> Storefront
+                </a>
+                <a href="admin.html" class="btn btn-dark btn-sm" target="_blank">
+                    <i class="fa-solid fa-gauge"></i> Admin Panel
+                </a>
+                <button class="btn btn-gold btn-sm" id="customerLogoutBtn" onclick="customerLogout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Section -->
+    <div class="dashboard-wrapper">
+        <div class="container">
+            <!-- Auth Gate if not logged in -->
+            <div id="customerAuthGate" style="max-width: 480px; margin: 2rem auto; display: none;">
+                <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
+                    <div class="logo-crest" style="margin: 0 auto 1.25rem;">HF</div>
+                    <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.6rem; margin-bottom: 0.35rem;">Customer Account</h3>
+                    <p style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 2rem;">Sign in to view your orders, addresses, and wishlist</p>
+
+                    <!-- Tabs: Login vs Signup -->
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: #0f0f13; padding: 4px; border-radius: var(--radius-sm);">
+                        <button class="btn btn-sm btn-gold" id="tabBtnLogin" style="flex: 1;" onclick="toggleCustomerAuthTab('login')">Sign In</button>
+                        <button class="btn btn-sm btn-dark" id="tabBtnSignup" style="flex: 1;" onclick="toggleCustomerAuthTab('signup')">Sign Up</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="portalLoginForm" onsubmit="handleCustomerLogin(event)">
+                        <div class="form-group" style="text-align: left; margin-bottom: 1rem;">
+                            <label for="custEmail">Email Address</label>
+                            <input type="email" id="custEmail" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 1rem;">
+                            <label for="custPassword">Password</label>
+                            <div class="password-input-wrap">
+                                <input type="password" id="custPassword" placeholder="••••••••" required>
+                                <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('custPassword', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1.25rem; font-size: 0.8rem;">
+                            <a href="javascript:void(0)" onclick="openForgotPasswordFlow()" style="color: var(--color-gold); text-decoration: underline;">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-gold btn-block">Sign In to Dashboard</button>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form id="portalSignupForm" onsubmit="handleCustomerSignup(event)" style="display: none;">
+                        <div class="form-group" style="text-align: left; margin-bottom: 0.85rem;">
+                            <label for="regName">Full Name *</label>
+                            <input type="text" id="regName" placeholder="e.g. Daniyal Raza" required>
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0.85rem;">
+                            <label for="regEmail">Email Address *</label>
+                            <input type="email" id="regEmail" placeholder="daniyal@example.com" required>
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0.85rem;">
+                            <label for="regPhone">Mobile Number in Pakistan *</label>
+                            <input type="tel" id="regPhone" placeholder="0300 1234567" required>
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0.85rem;">
+                            <label for="regCity">City in Pakistan</label>
+                            <input type="text" id="regCity" placeholder="Lahore / Karachi / Islamabad">
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 0.85rem;">
+                            <label for="regPassword">Create Password (Min 6 chars) *</label>
+                            <div class="password-input-wrap">
+                                <input type="password" id="regPassword" placeholder="••••••••" required>
+                                <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('regPassword', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group" style="text-align: left; margin-bottom: 1.25rem;">
+                            <label for="regConfirmPassword">Confirm Password *</label>
+                            <div class="password-input-wrap">
+                                <input type="password" id="regConfirmPassword" placeholder="••••••••" required>
+                                <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('regConfirmPassword', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-gold btn-block">Create Customer Account</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Customer Portal Main Layout -->
+            <div class="dashboard-grid" id="customerDashboardMain" style="display: none;">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="customer-card-header">
+                        <div class="customer-avatar" id="dashAvatar">H</div>
+                        <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.2rem; margin-bottom: 2px;" id="dashCustomerName">Customer</h4>
+                        <span style="font-size: 0.78rem; color: var(--color-gold);" id="dashCustomerEmail">customer@example.com</span>
+                    </div>
+
+                    <button class="dash-nav-btn active" onclick="switchCustomerTab('tabOrders', this)">
+                        <i class="fa-solid fa-box"></i> My Orders & History
+                    </button>
+                    <button class="dash-nav-btn" onclick="switchCustomerTab('tabProfile', this)">
+                        <i class="fa-solid fa-user"></i> My Profile Details
+                    </button>
+                    <button class="dash-nav-btn" onclick="switchCustomerTab('tabAddresses', this)">
+                        <i class="fa-solid fa-map-location-dot"></i> Saved Addresses
+                    </button>
+                    <button class="dash-nav-btn" onclick="switchCustomerTab('tabPassword', this)">
+                        <i class="fa-solid fa-key"></i> Change Password
+                    </button>
+                    <button class="dash-nav-btn" onclick="switchCustomerTab('tabWishlist', this)">
+                        <i class="fa-solid fa-heart"></i> My Wishlist
+                    </button>
+                </aside>
+
+                <!-- Tabs Content -->
+                <main class="dash-tab-content">
+                    <!-- 1. Orders Tab -->
+                    <section class="tab-panel active" id="tabOrders">
+                        <div class="flex-between" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <div>
+                                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Order History</h3>
+                                <p style="font-size: 0.85rem; color: var(--color-text-muted);">Real-time dispatch and tracking statuses across Pakistan</p>
+                            </div>
+                            <a href="index.html#shop-section" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Shop More</a>
+                        </div>
+                        <div id="customerOrdersContainer">
+                            <p style="text-align: center; color: var(--color-text-muted); padding: 3rem 0;">Loading your order history...</p>
+                        </div>
+                    </section>
+
+                    <!-- 2. Profile Details Tab -->
+                    <section class="tab-panel" id="tabProfile">
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Personal Profile</h3>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted);">Manage your name, phone number, and city for faster checkout</p>
+                        </div>
+
+                        <form onsubmit="handleProfileUpdate(event)" style="max-width: 540px;">
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="profName">Full Name</label>
+                                <input type="text" id="profName" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="profEmail">Email Address (Read-only)</label>
+                                <input type="email" id="profEmail" disabled style="opacity: 0.6; cursor: not-allowed;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="profPhone">Mobile Number in Pakistan</label>
+                                <input type="tel" id="profPhone" placeholder="0300 1234567" required>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.75rem;">
+                                <label for="profCity">City in Pakistan</label>
+                                <input type="text" id="profCity" placeholder="Lahore / Karachi / Islamabad">
+                            </div>
+                            <button type="submit" class="btn btn-gold"><i class="fa-solid fa-floppy-disk"></i> Save Profile</button>
+                        </form>
+                    </section>
+
+                    <!-- 3. Saved Addresses Tab -->
+                    <section class="tab-panel" id="tabAddresses">
+                        <div class="flex-between" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <div>
+                                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Saved Delivery Addresses</h3>
+                                <p style="font-size: 0.85rem; color: var(--color-text-muted);">Manage doorstep delivery locations across Pakistan</p>
+                            </div>
+                            <button class="btn btn-gold btn-sm" onclick="toggleNewAddressForm()">
+                                <i class="fa-solid fa-plus"></i> Add Address
+                            </button>
+                        </div>
+
+                        <!-- Add Address Form -->
+                        <div id="newAddressFormContainer" style="display: none; background: #0f0f13; border: 1px solid var(--color-card-border); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 2rem;">
+                            <h4 style="color: var(--color-gold); font-size: 1rem; margin-bottom: 1rem;">Add New Address</h4>
+                            <form onsubmit="handleSaveAddress(event)">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="addrLabel">Label</label>
+                                        <input type="text" id="addrLabel" placeholder="e.g. Home, Office, Farmhouse" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addrRecipient">Recipient Name *</label>
+                                        <input type="text" id="addrRecipient" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addrPhone">Recipient Mobile *</label>
+                                        <input type="tel" id="addrPhone" placeholder="0300 1234567" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addrCity">City in Pakistan *</label>
+                                        <input type="text" id="addrCity" placeholder="e.g. Lahore / Karachi" required>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="addrLine">Street Address / House / Sector *</label>
+                                        <input type="text" id="addrLine" placeholder="e.g. House #45, Street 12, DHA Phase 6" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="addrPostal">Postal Code</label>
+                                        <input type="text" id="addrPostal" placeholder="54000">
+                                    </div>
+                                    <div class="form-group" style="justify-content: center;">
+                                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: #fff;">
+                                            <input type="checkbox" id="addrDefault" style="accent-color: var(--color-gold);"> Set as default delivery address
+                                        </label>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                                    <button type="submit" class="btn btn-gold btn-sm">Save Address</button>
+                                    <button type="button" class="btn btn-outline btn-sm" onclick="toggleNewAddressForm()">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Addresses Grid -->
+                        <div id="customerAddressesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem;"></div>
+                    </section>
+
+                    <!-- 4. Change Password Tab -->
+                    <section class="tab-panel" id="tabPassword">
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Security & Password</h3>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted);">Ensure your account stays protected with salted cryptographic hashing</p>
+                        </div>
+
+                        <form onsubmit="handleChangePassword(event)" style="max-width: 480px;">
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="currPass">Current Password *</label>
+                                <div class="password-input-wrap">
+                                    <input type="password" id="currPass" required>
+                                    <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('currPass', this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.25rem;">
+                                <label for="newPass">New Password (Min 6 characters) *</label>
+                                <div class="password-input-wrap">
+                                    <input type="password" id="newPass" required>
+                                    <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('newPass', this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.75rem;">
+                                <label for="confNewPass">Confirm New Password *</label>
+                                <div class="password-input-wrap">
+                                    <input type="password" id="confNewPass" required>
+                                    <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('confNewPass', this)">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-gold"><i class="fa-solid fa-lock"></i> Update Password</button>
+                        </form>
+                    </section>
+
+                    <!-- 5. Wishlist Tab -->
+                    <section class="tab-panel" id="tabWishlist">
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                            <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Saved Wishlist</h3>
+                            <p style="font-size: 0.85rem; color: var(--color-text-muted);">Garments you marked as favorites</p>
+                        </div>
+                        <div id="customerWishlistContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem;"></div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal (6-Digit Code Flow) -->
+    <div class="modal-overlay" id="forgotPassModal">
+        <div class="modal-box" style="max-width: 440px; padding: 2.2rem;">
+            <button class="modal-close-btn" onclick="closeModal('forgotPassModal')">&times;</button>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div class="logo-crest" style="margin: 0 auto 0.75rem;">HF</div>
+                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.5rem;">Reset Password</h3>
+                <p style="color: var(--color-text-muted); font-size: 0.85rem;">Enter your email to receive a secure 6-digit verification code</p>
+            </div>
+
+            <!-- Step 1: Request Code -->
+            <form id="forgotStep1Form" onsubmit="handleSendResetCode(event)">
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="resetReqEmail">Account Email *</label>
+                    <input type="email" id="resetReqEmail" placeholder="customer@husnainfashion.pk" required>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Generate Verification Code</button>
+            </form>
+
+            <!-- Step 2: Enter Code & New Pass -->
+            <form id="forgotStep2Form" onsubmit="handleConfirmResetPassword(event)" style="display: none;">
+                <div style="background: rgba(197,160,89,0.1); border: 1px solid var(--color-gold); padding: 0.75rem; border-radius: var(--radius-sm); margin-bottom: 1rem; font-size: 0.82rem; color: var(--color-gold-light);" id="demoCodeBanner"></div>
+                <div class="form-group" style="margin-bottom: 0.85rem;">
+                    <label for="resetInputCode">6-Digit Verification Code *</label>
+                    <input type="text" id="resetInputCode" placeholder="e.g. 582914" maxlength="6" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 0.85rem;">
+                    <label for="resetNewPass">New Password *</label>
+                    <div class="password-input-wrap">
+                        <input type="password" id="resetNewPass" placeholder="••••••••" required>
+                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('resetNewPass', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                    <label for="resetConfPass">Confirm New Password *</label>
+                    <div class="password-input-wrap">
+                        <input type="password" id="resetConfPass" placeholder="••••••••" required>
+                        <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('resetConfPass', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Set New Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quick Portal Switcher Dock -->
+    <nav class="portal-switcher-dock" style="position: fixed; bottom: 20px; left: 20px; z-index: 999; display: flex; gap: 8px; background: rgba(16, 16, 22, 0.94); backdrop-filter: blur(12px); border: 1px solid var(--color-gold); padding: 8px 14px; border-radius: 999px; box-shadow: 0 8px 30px rgba(0,0,0,0.85); align-items: center;" aria-label="Portal Switcher">
+        <span style="font-size: 0.72rem; color: var(--color-gold-light); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding-right: 8px; border-right: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; gap: 5px;">
+            <i class="fa-solid fa-crown" style="color: var(--color-gold);"></i> Hub
+        </span>
+        <a href="index.html" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Online Storefront">
+            <i class="fa-solid fa-store"></i> Store
+        </a>
+        <a href="customer.html" style="font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--color-gold); color: #0b0b0d; text-decoration: none;" title="Customer Account & Orders">
+            <i class="fa-solid fa-user"></i> Customer
+        </a>
+        <a href="admin.html" target="_blank" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Admin Dashboard">
+            <i class="fa-solid fa-shield-halved"></i> Admin
+        </a>
+    </nav>
+
+    <!-- Customer Client JavaScript -->
+    <script src="js/products.js"></script>
+    <script src="js/customer.js"></script>
+</body>
+</html>
+
