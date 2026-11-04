@@ -42,6 +42,7 @@ async function syncProductsFromDatabase() {
 // Initialization on DOM Load
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initHeroSlider();
     initFlashSaleCountdown();
     initCatalogFilters();
@@ -1885,3 +1886,84 @@ function showToast(message, type = 'info') {
         setTimeout(() => toast.remove(), 350);
     }, 3800);
 }
+
+// ==========================================================================
+// Theme Management (Black & White Theme Toggle)
+// ==========================================================================
+function initTheme() {
+    const savedTheme = localStorage.getItem('hf_theme') || 'dark';
+    applyTheme(savedTheme, false);
+}
+
+function applyTheme(theme, showNotification = true) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('hf_theme', theme);
+
+    const icons = document.querySelectorAll('.theme-toggle-icon');
+    icons.forEach(icon => {
+        if (theme === 'light') {
+            icon.className = 'fa-solid fa-sun theme-toggle-icon';
+        } else {
+            icon.className = 'fa-solid fa-moon theme-toggle-icon';
+        }
+    });
+
+    const labels = document.querySelectorAll('.theme-quick-label');
+    labels.forEach(label => {
+        label.textContent = theme === 'light' ? 'Light' : 'Dark';
+    });
+
+    if (showNotification) {
+        showToast(theme === 'light' ? 'Switched to Luxury Light Mode (White)' : 'Switched to Signature Dark Mode (Black)', 'info');
+    }
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next, true);
+}
+
+// ==========================================================================
+// Mobile Navigation Drawer Controller
+// ==========================================================================
+function openMobileNav() {
+    const drawer = document.getElementById('mobileNavDrawer');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (drawer) drawer.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+    document.body.classList.add('nav-locked');
+}
+
+function closeMobileNav() {
+    const drawer = document.getElementById('mobileNavDrawer');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (drawer) drawer.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.classList.remove('nav-locked');
+}
+
+function toggleMobileSubmenu(submenuId, rowEl) {
+    const submenu = document.getElementById(submenuId);
+    if (!submenu) return;
+    const isOpen = submenu.classList.contains('open');
+
+    // Close all other open submenus first
+    document.querySelectorAll('.mobile-submenu').forEach(sm => sm.classList.remove('open'));
+    document.querySelectorAll('.mobile-nav-link-row').forEach(r => r.classList.remove('open'));
+
+    if (!isOpen) {
+        submenu.classList.add('open');
+        if (rowEl) rowEl.classList.add('open');
+    }
+}
+
+// Close mobile navigation on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeMobileNav();
+    }
+});
+
+// Immediately initialize theme upon script evaluation
+initTheme();

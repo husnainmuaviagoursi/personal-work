@@ -8,8 +8,43 @@ let userOrders = [];
 let userAddresses = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     checkCustomerAuth();
 });
+
+// --------------------------------------------------------------------------
+// Theme Toggle Engine (Dark <-> Light)
+// --------------------------------------------------------------------------
+function initTheme() {
+    const saved = localStorage.getItem('hf_theme') || 'dark';
+    applyTheme(saved);
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('hf_theme', theme);
+
+    // Update icons
+    const icons = document.querySelectorAll('.theme-toggle-icon');
+    icons.forEach(ic => {
+        if (theme === 'light') {
+            ic.className = 'fa-solid fa-sun theme-toggle-icon';
+        } else {
+            ic.className = 'fa-solid fa-moon theme-toggle-icon';
+        }
+    });
+
+    const labels = document.querySelectorAll('.theme-toggle-label');
+    labels.forEach(lb => {
+        lb.textContent = theme === 'light' ? 'Light Mode' : 'Dark Mode';
+    });
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+}
 
 function togglePasswordVisibility(inputId, btn) {
     const input = document.getElementById(inputId);

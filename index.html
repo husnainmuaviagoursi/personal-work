@@ -18,6 +18,14 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Immediate Theme Initialization to Prevent FOUC -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('hf_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
 
@@ -185,13 +193,18 @@
 
             <!-- Utility Action Icons -->
             <div class="header-actions">
+                <!-- Theme Switcher (Dark / Light Mode Toggle) -->
+                <button class="action-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                </button>
+
                 <!-- Search Button -->
                 <button class="action-btn" onclick="document.getElementById('searchInput')?.focus(); document.getElementById('shop-section')?.scrollIntoView({behavior: 'smooth'})" title="Search Garments">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
 
-                <!-- Track Order Shortcut -->
-                <a href="#tracking-section" class="action-btn" title="Track Live Pakistani Order">
+                <!-- Track Order Shortcut (Desktop) -->
+                <a href="#tracking-section" class="action-btn desktop-only-action" title="Track Live Pakistani Order">
                     <i class="fa-solid fa-truck-fast"></i>
                 </a>
 
@@ -201,8 +214,8 @@
                     <span class="badge-count" id="wishlistBadgeCount">0</span>
                 </button>
 
-                <!-- User Account Trigger -->
-                <button class="action-btn" id="userAccountBtn" onclick="openModal('authModal')" title="Account / Sign In">
+                <!-- User Account Trigger (Desktop) -->
+                <button class="action-btn desktop-only-action" id="userAccountBtn" onclick="openModal('authModal')" title="Account / Sign In">
                     <i class="fa-regular fa-user"></i>
                 </button>
 
@@ -213,7 +226,7 @@
                 </button>
 
                 <!-- Mobile Hamburger Button -->
-                <button class="hamburger-btn action-btn" onclick="toggleMobileNav()" title="Toggle Menu">
+                <button class="hamburger-btn action-btn" id="hamburgerBtn" onclick="openMobileNav()" title="Open Navigation Menu" aria-label="Open mobile navigation">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -1471,6 +1484,143 @@
         </div>
     </div>
 
+    <!-- ====================================================================
+         Mobile Navigation Drawer & Backdrop
+         ==================================================================== -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="closeMobileNav()"></div>
+    <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation Menu">
+        <div class="mobile-nav-header">
+            <a href="index.html" class="brand-logo" onclick="closeMobileNav()">
+                <div class="logo-crest">HF</div>
+                <div class="brand-text">
+                    <span class="brand-name">HUSNAIN <span>FASHION</span></span>
+                    <span class="brand-sub">LUXURY COUTURE</span>
+                </div>
+            </a>
+            <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close navigation">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Quick Access Action Strip in Mobile Menu -->
+        <div class="mobile-nav-quick-actions">
+            <button class="mobile-quick-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
+                <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                <span class="theme-quick-label">Theme</span>
+            </button>
+            <a href="#tracking-section" class="mobile-quick-btn" onclick="closeMobileNav()">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>Track</span>
+            </a>
+            <button class="mobile-quick-btn" onclick="closeMobileNav(); openModal('authModal')">
+                <i class="fa-regular fa-user"></i>
+                <span>Account</span>
+            </button>
+            <button class="mobile-quick-btn" onclick="closeMobileNav(); toggleWishlistDrawer(true)">
+                <i class="fa-regular fa-heart"></i>
+                <span>Wishlist</span>
+            </button>
+        </div>
+
+        <div class="mobile-nav-body">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="#hero-section" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <i class="fa-solid fa-house"></i> Home
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#shop-section" class="mobile-nav-link" onclick="closeMobileNav(); filterByCategory('all')">
+                        <i class="fa-solid fa-border-all"></i> All Garments Catalog
+                    </a>
+                </li>
+                
+                <!-- Shirts Submenu Accordion -->
+                <li class="mobile-nav-item has-sub">
+                    <div class="mobile-nav-link-row" onclick="toggleMobileSubmenu('mobSubShirts', this)">
+                        <span><i class="fa-solid fa-shirt"></i> Shirts Collection</span>
+                        <i class="fa-solid fa-chevron-down sub-arrow"></i>
+                    </div>
+                    <ul class="mobile-submenu" id="mobSubShirts">
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('shirts')">All Shirts (Casual & Formal)</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('shirts', 'casual-shirts')">Casual Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('shirts', 'formal-shirts')">Formal Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('shirts', 'polo-shirts')">Polo Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('shirts', 'cotton-shirts')">Cotton Shirts</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('shirts', 'printed-shirts')">Printed Shirts</a></li>
+                    </ul>
+                </li>
+
+                <!-- Trousers Submenu Accordion -->
+                <li class="mobile-nav-item has-sub">
+                    <div class="mobile-nav-link-row" onclick="toggleMobileSubmenu('mobSubTrousers', this)">
+                        <span><i class="fa-solid fa-vest"></i> Trousers & Chinos</span>
+                        <i class="fa-solid fa-chevron-down sub-arrow"></i>
+                    </div>
+                    <ul class="mobile-submenu" id="mobSubTrousers">
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('trousers')">All Trousers</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('trousers', 'formal-trousers')">Formal Trousers (Side Adjusters)</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('trousers', 'casual-trousers')">Casual Trousers</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('trousers', 'chinos')">Smart Chinos</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('trousers', 'cotton-trousers')">Cotton Trousers</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('trousers', 'jeans')">Raw Selvedge Denim</a></li>
+                    </ul>
+                </li>
+
+                <!-- Coats & Winter Submenu Accordion -->
+                <li class="mobile-nav-item has-sub">
+                    <div class="mobile-nav-link-row" onclick="toggleMobileSubmenu('mobSubCoats', this)">
+                        <span><i class="fa-solid fa-snowflake"></i> Coats & Winter Collection</span>
+                        <i class="fa-solid fa-chevron-down sub-arrow"></i>
+                    </div>
+                    <ul class="mobile-submenu" id="mobSubCoats">
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('coats-winter')">All Winter Garments</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('coats-winter', 'wool-coats')">Pure Wool Overcoats <span class="dropdown-badge">20% OFF</span></a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('coats-winter', 'blazers')">Tailored Blazers</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('coats-winter', 'winter-coats')">Winter Coats & Parkas</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('coats-winter', 'jackets')">Jackets & Suede</a></li>
+                        <li><a href="javascript:void(0)" onclick="closeMobileNav(); filterByCategory('coats-winter', 'formal-coats')">Formal Diplomat Coats</a></li>
+                    </ul>
+                </li>
+
+                <li class="mobile-nav-item">
+                    <a href="javascript:void(0)" class="mobile-nav-link" onclick="closeMobileNav(); filterBySeason('summer')">
+                        <i class="fa-solid fa-sun" style="color: var(--color-summer);"></i> Summer Collection ☀️
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="javascript:void(0)" class="mobile-nav-link" onclick="closeMobileNav(); filterBySeason('winter')">
+                        <i class="fa-solid fa-snowflake" style="color: var(--color-winter);"></i> Winter Collection ❄️
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#offers-section" class="mobile-nav-link text-gold" onclick="closeMobileNav()">
+                        <i class="fa-solid fa-tags"></i> Special Offers & Discounts %
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#about-section" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <i class="fa-solid fa-compass"></i> About Husnain Fashion
+                    </a>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="#footer" class="mobile-nav-link" onclick="closeMobileNav()">
+                        <i class="fa-solid fa-phone"></i> Customer Support & Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mobile-nav-footer">
+            <a href="https://wa.me/923004876246" target="_blank" class="mobile-whatsapp-btn">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp (0300-4876246)
+            </a>
+            <div class="mobile-currency-note">
+                🇵🇰 Nationwide Delivery • Cash on Delivery (COD)
+            </div>
+        </div>
+    </aside>
+
     <!-- Toast Notification Container -->
     <div class="toast-container" id="toastContainer"></div>
 
@@ -1482,26 +1632,6 @@
         function selectPaymentOpt(element) {
             document.querySelectorAll('.payment-opt-card').forEach(c => c.classList.remove('selected'));
             element.classList.add('selected');
-        }
-
-        function toggleMobileNav() {
-            const nav = document.querySelector('.nav-menu');
-            if (nav) {
-                if (nav.style.display === 'flex') {
-                    nav.style.display = 'none';
-                } else {
-                    nav.style.display = 'flex';
-                    nav.style.flexDirection = 'column';
-                    nav.style.position = 'absolute';
-                    nav.style.top = '100%';
-                    nav.style.left = '0';
-                    nav.style.right = '0';
-                    nav.style.background = '#141418';
-                    nav.style.padding = '1.5rem';
-                    nav.style.borderBottom = '1px solid var(--color-gold)';
-                    nav.style.boxShadow = '0 10px 30px rgba(0,0,0,0.8)';
-                }
-            }
         }
     </script>
 </body>

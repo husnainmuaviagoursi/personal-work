@@ -13,6 +13,14 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Immediate Theme Initialization to Prevent FOUC -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('hf_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     <style>
         .dashboard-wrapper {
             padding: 3rem 0 6rem;
@@ -95,19 +103,19 @@
             display: block;
         }
         .order-card-item {
-            background: #0f0f13;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--color-bg);
+            border: 1px solid var(--color-card-border);
             border-radius: var(--radius-md);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: border-color 0.2s;
         }
         .order-card-item:hover {
-            border-color: rgba(197, 160, 89, 0.4);
+            border-color: var(--color-gold);
         }
         .address-card {
-            background: #0f0f13;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--color-bg);
+            border: 1px solid var(--color-card-border);
             border-radius: var(--radius-sm);
             padding: 1.25rem;
             position: relative;
@@ -118,6 +126,24 @@
         @media (max-width: 860px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
+            }
+            .dashboard-wrapper {
+                padding: 1.5rem 0 4rem;
+            }
+            .dash-tab-content {
+                padding: 1.25rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .header .header-actions .btn {
+                padding: 0.45rem 0.65rem;
+                font-size: 0.78rem;
+            }
+            .brand-name {
+                font-size: 1.1rem;
+            }
+            .brand-sub {
+                display: none;
             }
         }
     </style>
@@ -136,14 +162,17 @@
             </a>
 
             <div class="header-actions">
+                <button class="action-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                </button>
                 <a href="index.html" class="btn btn-outline btn-sm">
-                    <i class="fa-solid fa-store"></i> Storefront
+                    <i class="fa-solid fa-store"></i> <span class="hide-mobile">Storefront</span>
                 </a>
-                <a href="admin.html" class="btn btn-dark btn-sm" target="_blank">
-                    <i class="fa-solid fa-gauge"></i> Admin Panel
+                <a href="admin.html" class="btn btn-dark btn-sm hide-mobile" target="_blank">
+                    <i class="fa-solid fa-gauge"></i> Admin
                 </a>
                 <button class="btn btn-gold btn-sm" id="customerLogoutBtn" onclick="customerLogout()">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="hide-mobile">Logout</span>
                 </button>
             </div>
         </div>
@@ -156,11 +185,11 @@
             <div id="customerAuthGate" style="max-width: 480px; margin: 2rem auto; display: none;">
                 <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center;">
                     <div class="logo-crest" style="margin: 0 auto 1.25rem;">HF</div>
-                    <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.6rem; margin-bottom: 0.35rem;">Customer Account</h3>
+                    <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.6rem; margin-bottom: 0.35rem;">Customer Account</h3>
                     <p style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 2rem;">Sign in to view your orders, addresses, and wishlist</p>
 
                     <!-- Tabs: Login vs Signup -->
-                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: #0f0f13; padding: 4px; border-radius: var(--radius-sm);">
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: var(--color-bg); border: 1px solid var(--color-card-border); padding: 4px; border-radius: var(--radius-sm);">
                         <button class="btn btn-sm btn-gold" id="tabBtnLogin" style="flex: 1;" onclick="toggleCustomerAuthTab('login')">Sign In</button>
                         <button class="btn btn-sm btn-dark" id="tabBtnSignup" style="flex: 1;" onclick="toggleCustomerAuthTab('signup')">Sign Up</button>
                     </div>

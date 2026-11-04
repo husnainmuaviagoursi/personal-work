@@ -13,6 +13,14 @@
     
     <!-- Admin Stylesheet -->
     <link rel="stylesheet" href="css/admin.css">
+
+    <!-- Immediate Theme Initialization to Prevent FOUC -->
+    <script>
+        (function() {
+            var theme = localStorage.getItem('hf_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 </head>
 <body>
 
@@ -20,6 +28,11 @@
          Admin Login Gate Screen (Shown if not authenticated as Admin)
          ==================================================================== -->
     <div class="admin-login-screen" id="adminLoginScreen">
+        <div style="position: absolute; top: 1.5rem; right: 1.5rem;">
+            <button class="btn-outline btn-sm" onclick="toggleTheme()" title="Switch Light/Dark Mode" style="border-radius: 999px; padding: 0.5rem 0.9rem;">
+                <i class="fa-solid fa-moon theme-toggle-icon"></i> <span class="theme-toggle-label">Theme</span>
+            </button>
+        </div>
         <div class="admin-login-box">
             <div class="sidebar-crest" style="margin: 0 auto 1.25rem; width: 56px; height: 56px; font-size: 1.5rem;">HF</div>
             <h2 style="font-family: 'Cinzel', serif; color: #fff; font-size: 1.6rem; margin-bottom: 0.35rem;">Husnain Admin</h2>
@@ -60,15 +73,23 @@
          Main Admin Dashboard Layout
          ==================================================================== -->
     <div class="admin-wrapper" id="adminDashboardApp" style="display: none;">
+        <!-- Backdrop for mobile drawer -->
+        <div class="admin-sidebar-backdrop" id="adminSidebarBackdrop" onclick="closeAdminSidebar()"></div>
+
         <!-- Left Sidebar Navigation -->
-        <aside class="admin-sidebar">
-            <a href="admin.html" class="sidebar-brand">
-                <div class="sidebar-crest">HF</div>
-                <div class="sidebar-brand-text">
-                    <h3>HUSNAIN <span>ADMIN</span></h3>
-                    <span>STORE MANAGEMENT</span>
-                </div>
-            </a>
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle);">
+                <a href="admin.html" class="sidebar-brand" style="border-bottom: none; flex: 1;">
+                    <div class="sidebar-crest">HF</div>
+                    <div class="sidebar-brand-text">
+                        <h3>HUSNAIN <span>ADMIN</span></h3>
+                        <span>STORE MANAGEMENT</span>
+                    </div>
+                </a>
+                <button class="admin-sidebar-close-btn" onclick="closeAdminSidebar()" title="Close Navigation" aria-label="Close sidebar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
             <nav class="sidebar-nav">
                 <span class="nav-category-title">Core Management</span>
@@ -115,11 +136,20 @@
         <main class="admin-main">
             <!-- Top Bar -->
             <header class="admin-topbar">
-                <div class="page-title-wrap">
-                    <h1 id="tabHeaderTitle">Overview & Analytics</h1>
-                    <p id="tabHeaderSubtitle">Real-time revenue, order metrics and inventory status</p>
+                <div style="display: flex; align-items: center; gap: 0.85rem;">
+                    <button class="btn-outline btn-sm admin-mobile-toggle" onclick="toggleAdminSidebar()" title="Toggle Menu" id="adminSidebarToggleBtn" aria-label="Toggle navigation menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title-wrap">
+                        <h1 id="tabHeaderTitle">Overview & Analytics</h1>
+                        <p id="tabHeaderSubtitle">Real-time revenue, order metrics and inventory status</p>
+                    </div>
                 </div>
                 <div class="topbar-actions">
+                    <button class="btn-outline btn-sm theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode" aria-label="Switch theme">
+                        <i class="fa-solid fa-moon theme-toggle-icon"></i>
+                        <span class="theme-toggle-label">Theme</span>
+                    </button>
                     <button class="btn-gold btn-sm" onclick="openAddProductModal()">
                         <i class="fa-solid fa-plus"></i> Add Product
                     </button>

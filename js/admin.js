@@ -36,10 +36,63 @@ const SUBCATEGORIES_MAP = {
 
 // Initial Load
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     checkAdminAuth();
     updateSubCategories();
     setDefaultOfferDates();
 });
+
+// --------------------------------------------------------------------------
+// Theme Toggle Engine (Dark <-> Light)
+// --------------------------------------------------------------------------
+function initTheme() {
+    const saved = localStorage.getItem('hf_theme') || 'dark';
+    applyTheme(saved);
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('hf_theme', theme);
+
+    // Update icons
+    const icons = document.querySelectorAll('.theme-toggle-icon');
+    icons.forEach(ic => {
+        if (theme === 'light') {
+            ic.className = 'fa-solid fa-sun theme-toggle-icon';
+        } else {
+            ic.className = 'fa-solid fa-moon theme-toggle-icon';
+        }
+    });
+
+    const labels = document.querySelectorAll('.theme-toggle-label');
+    labels.forEach(lb => {
+        lb.textContent = theme === 'light' ? 'Light' : 'Dark';
+    });
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+}
+
+// --------------------------------------------------------------------------
+// Mobile Sidebar Controls
+// --------------------------------------------------------------------------
+function toggleAdminSidebar() {
+    const sidebar = document.getElementById('adminSidebar');
+    const backdrop = document.getElementById('adminSidebarBackdrop');
+    if (!sidebar) return;
+    const isOpen = sidebar.classList.toggle('open');
+    if (backdrop) backdrop.classList.toggle('open', isOpen);
+}
+
+function closeAdminSidebar() {
+    const sidebar = document.getElementById('adminSidebar');
+    const backdrop = document.getElementById('adminSidebarBackdrop');
+    if (sidebar) sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('open');
+}
 
 function togglePasswordVisibility(inputId, btn) {
     const input = document.getElementById(inputId);
@@ -129,6 +182,7 @@ function switchAdminTab(tabId, el) {
     const targetTab = document.getElementById(tabId);
     if (targetTab) targetTab.classList.add('active');
     if (el) el.classList.add('active');
+    closeAdminSidebar();
 
     const titleEl = document.getElementById('tabHeaderTitle');
     const subEl = document.getElementById('tabHeaderSubtitle');
