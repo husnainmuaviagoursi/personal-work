@@ -43,16 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --------------------------------------------------------------------------
-// Theme Toggle Engine (Dark <-> Light)
+// Theme Toggle Engine (Black & White Operation)
 // --------------------------------------------------------------------------
 function initTheme() {
-    const saved = localStorage.getItem('hf_theme') || 'dark';
+    let saved = localStorage.getItem('hf_theme_v2');
+    if (!saved) {
+        saved = 'light';
+        localStorage.setItem('hf_theme_v2', 'light');
+        localStorage.setItem('hf_theme', 'light');
+    } else {
+        saved = localStorage.getItem('hf_theme') || 'light';
+    }
     applyTheme(saved);
 }
 
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('hf_theme', theme);
+    localStorage.setItem('hf_theme_v2', theme);
 
     // Update icons
     const icons = document.querySelectorAll('.theme-toggle-icon');
@@ -66,12 +74,33 @@ function applyTheme(theme) {
 
     const labels = document.querySelectorAll('.theme-toggle-label');
     labels.forEach(lb => {
-        lb.textContent = theme === 'light' ? 'Light' : 'Dark';
+        lb.textContent = theme === 'light' ? 'White' : 'Black';
+    });
+
+    const floatingLabels = document.querySelectorAll('.floating-bw-label');
+    floatingLabels.forEach(fl => {
+        fl.textContent = theme === 'light' ? 'White ⚪ (Go Black)' : 'Black ⚫ (Go White)';
+    });
+
+    // Update Segmented B&W Switcher pill buttons
+    const bwSwitchers = document.querySelectorAll('.bw-theme-switcher');
+    bwSwitchers.forEach(sw => {
+        const whiteBtn = sw.querySelector('.btn-opt-white');
+        const blackBtn = sw.querySelector('.btn-opt-black');
+        if (whiteBtn && blackBtn) {
+            if (theme === 'light') {
+                whiteBtn.classList.add('active');
+                blackBtn.classList.remove('active');
+            } else {
+                whiteBtn.classList.remove('active');
+                blackBtn.classList.add('active');
+            }
+        }
     });
 }
 
 function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
     const next = current === 'dark' ? 'light' : 'dark';
     applyTheme(next);
 }

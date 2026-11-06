@@ -1888,17 +1888,26 @@ function showToast(message, type = 'info') {
 }
 
 // ==========================================================================
-// Theme Management (Black & White Theme Toggle)
+// Theme Management (Black & White Theme Operation)
 // ==========================================================================
 function initTheme() {
-    const savedTheme = localStorage.getItem('hf_theme') || 'dark';
+    let savedTheme = localStorage.getItem('hf_theme_v2');
+    if (!savedTheme) {
+        savedTheme = 'light';
+        localStorage.setItem('hf_theme_v2', 'light');
+        localStorage.setItem('hf_theme', 'light');
+    } else {
+        savedTheme = localStorage.getItem('hf_theme') || 'light';
+    }
     applyTheme(savedTheme, false);
 }
 
 function applyTheme(theme, showNotification = true) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('hf_theme', theme);
+    localStorage.setItem('hf_theme_v2', theme);
 
+    // Update traditional theme icons
     const icons = document.querySelectorAll('.theme-toggle-icon');
     icons.forEach(icon => {
         if (theme === 'light') {
@@ -1908,20 +1917,48 @@ function applyTheme(theme, showNotification = true) {
         }
     });
 
-    const labels = document.querySelectorAll('.theme-quick-label');
+    const labels = document.querySelectorAll('.theme-quick-label, .theme-toggle-label');
     labels.forEach(label => {
-        label.textContent = theme === 'light' ? 'Light' : 'Dark';
+        label.textContent = theme === 'light' ? 'White' : 'Black';
+    });
+
+    // Update Floating B&W Button label
+    const floatingLabels = document.querySelectorAll('.floating-bw-label');
+    floatingLabels.forEach(fl => {
+        fl.textContent = theme === 'light' ? 'White ⚪ (Go Black)' : 'Black ⚫ (Go White)';
+    });
+
+    // Update Segmented B&W Switcher pill buttons
+    const bwSwitchers = document.querySelectorAll('.bw-theme-switcher');
+    bwSwitchers.forEach(sw => {
+        const whiteBtn = sw.querySelector('.btn-opt-white');
+        const blackBtn = sw.querySelector('.btn-opt-black');
+        if (whiteBtn && blackBtn) {
+            if (theme === 'light') {
+                whiteBtn.classList.add('active');
+                blackBtn.classList.remove('active');
+            } else {
+                whiteBtn.classList.remove('active');
+                blackBtn.classList.add('active');
+            }
+        }
     });
 
     if (showNotification) {
-        showToast(theme === 'light' ? 'Switched to Luxury Light Mode (White)' : 'Switched to Signature Dark Mode (Black)', 'info');
+        showToast(theme === 'light' ? '⚪ Switched to Full Pure White Mode' : '⚫ Switched to Luxury Black Mode', 'info');
     }
 }
 
 function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
     const next = current === 'dark' ? 'light' : 'dark';
     applyTheme(next, true);
+}
+
+function setThemeMode(mode) {
+    if (mode === 'light' || mode === 'dark') {
+        applyTheme(mode, true);
+    }
 }
 
 // ==========================================================================

@@ -17,7 +17,14 @@
     <!-- Immediate Theme Initialization to Prevent FOUC -->
     <script>
         (function() {
-            var theme = localStorage.getItem('hf_theme') || 'dark';
+            var theme = localStorage.getItem('hf_theme_v2');
+            if (!theme) {
+                theme = 'light';
+                localStorage.setItem('hf_theme_v2', 'light');
+                localStorage.setItem('hf_theme', 'light');
+            } else {
+                theme = localStorage.getItem('hf_theme') || 'light';
+            }
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
@@ -29,9 +36,15 @@
          ==================================================================== -->
     <div class="admin-login-screen" id="adminLoginScreen">
         <div style="position: absolute; top: 1.5rem; right: 1.5rem;">
-            <button class="btn-outline btn-sm" onclick="toggleTheme()" title="Switch Light/Dark Mode" style="border-radius: 999px; padding: 0.5rem 0.9rem;">
-                <i class="fa-solid fa-moon theme-toggle-icon"></i> <span class="theme-toggle-label">Theme</span>
-            </button>
+            <!-- Luxury Black & White (B&W) Segmented Switcher -->
+            <div class="bw-theme-switcher" id="bwThemeSwitcherLogin" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
+                <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
+                    <i class="fa-solid fa-sun"></i> White
+                </button>
+                <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
+                    <i class="fa-solid fa-moon"></i> Black
+                </button>
+            </div>
         </div>
         <div class="admin-login-box">
             <div class="sidebar-crest" style="margin: 0 auto 1.25rem; width: 56px; height: 56px; font-size: 1.5rem;">HF</div>
@@ -146,10 +159,15 @@
                     </div>
                 </div>
                 <div class="topbar-actions">
-                    <button class="btn-outline btn-sm theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode" aria-label="Switch theme">
-                        <i class="fa-solid fa-moon theme-toggle-icon"></i>
-                        <span class="theme-toggle-label">Theme</span>
-                    </button>
+                    <!-- Luxury Black & White (B&W) Segmented Switcher -->
+                    <div class="bw-theme-switcher" id="bwThemeSwitcher" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
+                        <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
+                            <i class="fa-solid fa-sun"></i> White
+                        </button>
+                        <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
+                            <i class="fa-solid fa-moon"></i> Black
+                        </button>
+                    </div>
                     <button class="btn-gold btn-sm" onclick="openAddProductModal()">
                         <i class="fa-solid fa-plus"></i> Add Product
                     </button>
@@ -611,7 +629,7 @@
             <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 0.5rem;">Order Details: <span id="viewOrderId" style="color: var(--gold-light);"></span></h3>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;" id="viewOrderDate"></p>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; background: #0f0f14; padding: 1.25rem; border-radius: var(--radius-sm);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; background: var(--bg-dark); border: 1px solid var(--border-subtle); padding: 1.25rem; border-radius: var(--radius-sm);">
                 <div>
                     <h5 style="color: var(--gold-light); font-size: 0.82rem; text-transform: uppercase;">Consignee Information</h5>
                     <p id="viewOrderCustomer" style="color: #fff; font-weight: 700; margin-top: 4px;"></p>
@@ -654,6 +672,14 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Floating Quick B&W Operation Widget -->
+    <div class="floating-bw-wrap">
+        <button class="floating-bw-toggle" id="floatingBwBtn" onclick="toggleTheme()" title="Switch Theme (Black & White)" aria-label="Toggle Black & White Theme">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+            <span class="floating-bw-label">White ⚪ (Go Black)</span>
+        </button>
     </div>
 
     <!-- Admin JavaScript Engine -->

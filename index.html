@@ -22,7 +22,14 @@
     <!-- Immediate Theme Initialization to Prevent FOUC -->
     <script>
         (function() {
-            var theme = localStorage.getItem('hf_theme') || 'dark';
+            var theme = localStorage.getItem('hf_theme_v2');
+            if (!theme) {
+                theme = 'light';
+                localStorage.setItem('hf_theme_v2', 'light');
+                localStorage.setItem('hf_theme', 'light');
+            } else {
+                theme = localStorage.getItem('hf_theme') || 'light';
+            }
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
@@ -193,10 +200,15 @@
 
             <!-- Utility Action Icons -->
             <div class="header-actions">
-                <!-- Theme Switcher (Dark / Light Mode Toggle) -->
-                <button class="action-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode" aria-label="Toggle theme">
-                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
-                </button>
+                <!-- Luxury Black & White (B&W) Segmented Switcher -->
+                <div class="bw-theme-switcher" id="bwThemeSwitcher" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
+                    <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
+                        <i class="fa-solid fa-sun"></i> White
+                    </button>
+                    <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
+                        <i class="fa-solid fa-moon"></i> Black
+                    </button>
+                </div>
 
                 <!-- Search Button -->
                 <button class="action-btn" onclick="document.getElementById('searchInput')?.focus(); document.getElementById('shop-section')?.scrollIntoView({behavior: 'smooth'})" title="Search Garments">
@@ -688,7 +700,7 @@
                         </div>
                     </div>
 
-                    <div style="background: #0f0f13; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 2rem;">
+                    <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 2rem;">
                         <h5 style="color: var(--color-gold); font-size: 0.95rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
                             <i class="fa-solid fa-clock-rotate-left"></i> Consignment Activity Log
                         </h5>
@@ -1120,7 +1132,7 @@
             </div>
 
             <!-- Order Financial Summary Pill -->
-            <div style="background: #0f0f13; border: 1px solid rgba(197,160,89,0.25); border-radius: var(--radius-sm); padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-sm); padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                 <div>
                     <span style="font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase;">Order Total (<span id="coItemsCount">0 items</span>)</span>
                     <h4 style="color: var(--color-gold-bright); font-size: 1.2rem; font-weight: 800;" id="coGrandTotal">Rs. 0</h4>
@@ -1255,7 +1267,7 @@
                 <code id="successTrackingCode">HF-PK-8921</code>
             </div>
 
-            <div style="background: #0f0f13; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 1.25rem; max-width: 440px; margin: 0 auto 2rem; text-align: left; font-size: 0.85rem;">
+            <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-md); padding: 1.25rem; max-width: 440px; margin: 0 auto 2rem; text-align: left; font-size: 0.85rem;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
                     <span style="color: var(--color-text-muted);">Customer:</span>
                     <strong style="color: #fff;" id="successCustomerName">Arslan Tariq</strong>
@@ -1364,7 +1376,7 @@
             </div>
 
             <!-- Login vs Signup Switcher -->
-            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: #0f0f13; padding: 4px; border-radius: var(--radius-sm);">
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); padding: 4px; border-radius: var(--radius-sm);">
                 <button class="btn btn-sm btn-gold" id="modalTabLogin" style="flex: 1;" onclick="switchAuthModalTab('login')">Sign In</button>
                 <button class="btn btn-sm btn-dark" id="modalTabSignup" style="flex: 1;" onclick="switchAuthModalTab('signup')">Create Account</button>
             </div>
@@ -1620,6 +1632,14 @@
             </div>
         </div>
     </aside>
+
+    <!-- Floating Quick B&W Operation Widget -->
+    <div class="floating-bw-wrap">
+        <button class="floating-bw-toggle" id="floatingBwBtn" onclick="toggleTheme()" title="Switch Theme (Black & White)" aria-label="Toggle Black & White Theme">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+            <span class="floating-bw-label">White ⚪ (Go Black)</span>
+        </button>
+    </div>
 
     <!-- Toast Notification Container -->
     <div class="toast-container" id="toastContainer"></div>

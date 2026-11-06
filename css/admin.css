@@ -33,23 +33,23 @@
     --radius-pill: 999px;
 }
 
-/* Light Theme Variables */
+/* Light Theme Variables (Crisp Full Pure White Luxury) */
 [data-theme="light"] {
-    --bg-dark: #f8f9fb;
+    --bg-dark: #ffffff;
     --bg-sidebar: #ffffff;
     --bg-card: #ffffff;
-    --bg-card-hover: #f3f4f8;
+    --bg-card-hover: #ffffff;
     --border-gold: rgba(179, 139, 63, 0.35);
-    --border-subtle: #e2e5ec;
+    --border-subtle: #e5e7eb;
     
     --gold-primary: #b38b3f;
     --gold-light: #946e25;
     --gold-bright: #b8860b;
     --gold-glow: rgba(179, 139, 63, 0.12);
     
-    --text-main: #111215;
-    --text-muted: #525660;
-    --text-dim: #7f8490;
+    --text-main: #0b0b0d;
+    --text-muted: #4b5563;
+    --text-dim: #6b7280;
 }
 
 * {
@@ -725,53 +725,156 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
 }
 [data-theme="light"] .admin-table th {
-    background: #f1f3f7;
-    color: #111215;
+    background: #ffffff;
+    border-bottom: 2px solid #e5e7eb;
+    color: #0b0b0d;
 }
 [data-theme="light"] .admin-table td {
-    color: #111215;
+    color: #0b0b0d;
+    border-bottom: 1px solid #f1f3f7;
 }
 [data-theme="light"] .admin-table tr:hover td {
-    background: #f8f9fb;
+    background: rgba(179, 139, 63, 0.05);
 }
 [data-theme="light"] input,
 [data-theme="light"] select,
 [data-theme="light"] textarea {
     background: #ffffff;
     border-color: #d1d5db;
-    color: #111215;
+    color: #0b0b0d;
 }
 [data-theme="light"] .admin-modal-box {
     background: #ffffff;
-    color: #111215;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    color: #0b0b0d;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 [data-theme="light"] .admin-modal-box h2,
 [data-theme="light"] .admin-modal-box h3,
 [data-theme="light"] .admin-modal-box h4 {
-    color: #111215;
+    color: #0b0b0d;
 }
 [data-theme="light"] .admin-modal-close:hover {
-    color: #111215;
+    color: #0b0b0d;
 }
 [data-theme="light"] .admin-login-screen {
-    background: radial-gradient(circle at 50% 50%, #f4f5f8 0%, #e2e5eb 100%);
+    background: #ffffff;
 }
 [data-theme="light"] .admin-login-box {
     background: #ffffff;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
 }
 [data-theme="light"] .admin-login-box h2 {
-    color: #111215 !important;
+    color: #0b0b0d !important;
 }
 [data-theme="light"] .sidebar-crest {
-    background: #fdf8ef;
+    background: #ffffff;
 }
 [data-theme="light"] ::-webkit-scrollbar-track {
-    background: #f0f0f0;
+    background: #ffffff;
 }
 [data-theme="light"] ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #e2e8f0;
+}
+
+/* Luxury Black & White (B&W) Switcher in Admin */
+.bw-theme-switcher {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    border-radius: 999px;
+    padding: 3px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.bw-theme-switcher:hover {
+    border-color: var(--gold-primary);
+}
+
+.bw-option-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    transition: all 0.2s ease;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .bw-option-btn.btn-opt-black,
+:root:not([data-theme="light"]) .bw-option-btn.btn-opt-black,
+.bw-option-btn.btn-opt-black.active {
+    background: #000000;
+    color: #ffffff;
+    border-color: var(--gold-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .bw-option-btn.btn-opt-white,
+:root:not([data-theme="light"]) .bw-option-btn.btn-opt-white {
+    color: #888888;
+}
+
+[data-theme="light"] .bw-theme-switcher {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .bw-option-btn.btn-opt-white,
+.bw-option-btn.btn-opt-white.active {
+    background: #ffffff;
+    color: #0b0b0d;
+    border-color: var(--gold-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .bw-option-btn.btn-opt-black {
+    color: #6b7280;
+}
+
+/* Floating B&W Operation Button */
+.floating-bw-wrap {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+}
+
+.floating-bw-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: #0d0d0f;
+    color: #ffffff;
+    border: 1.5px solid var(--gold-primary);
+    padding: 0.65rem 1.15rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease;
+}
+
+.floating-bw-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(197, 160, 89, 0.35);
+}
+
+[data-theme="light"] .floating-bw-toggle {
+    background: #ffffff;
+    color: #0b0b0d;
+    border: 1.5px solid var(--gold-primary);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 /* Mobile Sidebar Drawer Controls */

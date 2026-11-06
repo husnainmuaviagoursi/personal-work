@@ -17,7 +17,14 @@
     <!-- Immediate Theme Initialization to Prevent FOUC -->
     <script>
         (function() {
-            var theme = localStorage.getItem('hf_theme') || 'dark';
+            var theme = localStorage.getItem('hf_theme_v2');
+            if (!theme) {
+                theme = 'light';
+                localStorage.setItem('hf_theme_v2', 'light');
+                localStorage.setItem('hf_theme', 'light');
+            } else {
+                theme = localStorage.getItem('hf_theme') || 'light';
+            }
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
@@ -162,9 +169,15 @@
             </a>
 
             <div class="header-actions">
-                <button class="action-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light/Dark Mode" aria-label="Toggle theme">
-                    <i class="fa-solid fa-moon theme-toggle-icon"></i>
-                </button>
+                <!-- Luxury Black & White (B&W) Segmented Switcher -->
+                <div class="bw-theme-switcher" id="bwThemeSwitcher" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
+                    <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
+                        <i class="fa-solid fa-sun"></i> White
+                    </button>
+                    <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
+                        <i class="fa-solid fa-moon"></i> Black
+                    </button>
+                </div>
                 <a href="index.html" class="btn btn-outline btn-sm">
                     <i class="fa-solid fa-store"></i> <span class="hide-mobile">Storefront</span>
                 </a>
@@ -340,7 +353,7 @@
                         </div>
 
                         <!-- Add Address Form -->
-                        <div id="newAddressFormContainer" style="display: none; background: #0f0f13; border: 1px solid var(--color-card-border); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 2rem;">
+                        <div id="newAddressFormContainer" style="display: none; background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-sm); padding: 1.5rem; margin-bottom: 2rem;">
                             <h4 style="color: var(--color-gold); font-size: 1rem; margin-bottom: 1rem;">Add New Address</h4>
                             <form onsubmit="handleSaveAddress(event)">
                                 <div class="form-grid">
@@ -484,6 +497,14 @@
                 <button type="submit" class="btn btn-gold btn-block">Set New Password</button>
             </form>
         </div>
+    </div>
+
+    <!-- Floating Quick B&W Operation Widget -->
+    <div class="floating-bw-wrap">
+        <button class="floating-bw-toggle" id="floatingBwBtn" onclick="toggleTheme()" title="Switch Theme (Black & White)" aria-label="Toggle Black & White Theme">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+            <span class="floating-bw-label">White ⚪ (Go Black)</span>
+        </button>
     </div>
 
     <!-- Quick Portal Switcher Dock -->
