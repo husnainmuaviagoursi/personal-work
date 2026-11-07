@@ -17,15 +17,9 @@
     <!-- Immediate Theme Initialization to Prevent FOUC -->
     <script>
         (function() {
-            var theme = localStorage.getItem('hf_theme_v2');
-            if (!theme) {
-                theme = 'light';
-                localStorage.setItem('hf_theme_v2', 'light');
-                localStorage.setItem('hf_theme', 'light');
-            } else {
-                theme = localStorage.getItem('hf_theme') || 'light';
-            }
+            var theme = localStorage.getItem('hf_theme') || localStorage.getItem('hf_theme_v2') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('hf_theme', theme);
         })();
     </script>
     <style>
@@ -88,7 +82,7 @@
         .dash-nav-btn:hover,
         .dash-nav-btn.active {
             background: rgba(197, 160, 89, 0.12);
-            color: #fff;
+            color: var(--color-text-main);
             border-color: rgba(197, 160, 89, 0.3);
         }
         .dash-nav-btn i {
@@ -169,15 +163,6 @@
             </a>
 
             <div class="header-actions">
-                <!-- Luxury Black & White (B&W) Segmented Switcher -->
-                <div class="bw-theme-switcher" id="bwThemeSwitcher" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
-                    <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
-                        <i class="fa-solid fa-sun"></i> White
-                    </button>
-                    <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
-                        <i class="fa-solid fa-moon"></i> Black
-                    </button>
-                </div>
                 <a href="index.html" class="btn btn-outline btn-sm">
                     <i class="fa-solid fa-store"></i> <span class="hide-mobile">Storefront</span>
                 </a>
@@ -187,6 +172,11 @@
                 <button class="btn btn-gold btn-sm" id="customerLogoutBtn" onclick="customerLogout()">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> <span class="hide-mobile">Logout</span>
                 </button>
+                <!-- Simple Theme Toggle Icons (White & Black) - Far Right Side -->
+                <div class="header-theme-icons" id="bwThemeSwitcher" role="group" aria-label="Theme Selection">
+                    <i class="fa-solid fa-sun theme-icon-opt theme-icon-white" onclick="setThemeMode('light'); event.stopPropagation();" title="White Mode (Sun)" role="button" aria-label="White Theme"></i>
+                    <i class="fa-solid fa-moon theme-icon-opt theme-icon-black" onclick="setThemeMode('dark'); event.stopPropagation();" title="Black Mode (Moon)" role="button" aria-label="Black Theme"></i>
+                </div>
             </div>
         </div>
     </header>
@@ -275,7 +265,7 @@
                 <aside class="dashboard-sidebar">
                     <div class="customer-card-header">
                         <div class="customer-avatar" id="dashAvatar">H</div>
-                        <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.2rem; margin-bottom: 2px;" id="dashCustomerName">Customer</h4>
+                        <h4 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.2rem; margin-bottom: 2px;" id="dashCustomerName">Customer</h4>
                         <span style="font-size: 0.78rem; color: var(--color-gold);" id="dashCustomerEmail">customer@example.com</span>
                     </div>
 
@@ -300,9 +290,9 @@
                 <main class="dash-tab-content">
                     <!-- 1. Orders Tab -->
                     <section class="tab-panel active" id="tabOrders">
-                        <div class="flex-between" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                        <div class="flex-between" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-card-border);">
                             <div>
-                                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Order History</h3>
+                                <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.4rem;">Order History</h3>
                                 <p style="font-size: 0.85rem; color: var(--color-text-muted);">Real-time dispatch and tracking statuses across Pakistan</p>
                             </div>
                             <a href="index.html#shop-section" class="btn btn-gold btn-sm"><i class="fa-solid fa-plus"></i> Shop More</a>
@@ -314,8 +304,8 @@
 
                     <!-- 2. Profile Details Tab -->
                     <section class="tab-panel" id="tabProfile">
-                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
-                            <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Personal Profile</h3>
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-card-border);">
+                            <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.4rem;">Personal Profile</h3>
                             <p style="font-size: 0.85rem; color: var(--color-text-muted);">Manage your name, phone number, and city for faster checkout</p>
                         </div>
 
@@ -342,9 +332,9 @@
 
                     <!-- 3. Saved Addresses Tab -->
                     <section class="tab-panel" id="tabAddresses">
-                        <div class="flex-between" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                        <div class="flex-between" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-card-border);">
                             <div>
-                                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Saved Delivery Addresses</h3>
+                                <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.4rem;">Saved Delivery Addresses</h3>
                                 <p style="font-size: 0.85rem; color: var(--color-text-muted);">Manage doorstep delivery locations across Pakistan</p>
                             </div>
                             <button class="btn btn-gold btn-sm" onclick="toggleNewAddressForm()">
@@ -400,8 +390,8 @@
 
                     <!-- 4. Change Password Tab -->
                     <section class="tab-panel" id="tabPassword">
-                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
-                            <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Security & Password</h3>
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-card-border);">
+                            <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.4rem;">Security & Password</h3>
                             <p style="font-size: 0.85rem; color: var(--color-text-muted);">Ensure your account stays protected with salted cryptographic hashing</p>
                         </div>
 
@@ -439,8 +429,8 @@
 
                     <!-- 5. Wishlist Tab -->
                     <section class="tab-panel" id="tabWishlist">
-                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
-                            <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.4rem;">Saved Wishlist</h3>
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-card-border);">
+                            <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.4rem;">Saved Wishlist</h3>
                             <p style="font-size: 0.85rem; color: var(--color-text-muted);">Garments you marked as favorites</p>
                         </div>
                         <div id="customerWishlistContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem;"></div>
@@ -456,7 +446,7 @@
             <button class="modal-close-btn" onclick="closeModal('forgotPassModal')">&times;</button>
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <div class="logo-crest" style="margin: 0 auto 0.75rem;">HF</div>
-                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.5rem;">Reset Password</h3>
+                <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.5rem;">Reset Password</h3>
                 <p style="color: var(--color-text-muted); font-size: 0.85rem;">Enter your email to receive a secure 6-digit verification code</p>
             </div>
 
@@ -499,26 +489,19 @@
         </div>
     </div>
 
-    <!-- Floating Quick B&W Operation Widget -->
-    <div class="floating-bw-wrap">
-        <button class="floating-bw-toggle" id="floatingBwBtn" onclick="toggleTheme()" title="Switch Theme (Black & White)" aria-label="Toggle Black & White Theme">
-            <i class="fa-solid fa-circle-half-stroke"></i>
-            <span class="floating-bw-label">White ⚪ (Go Black)</span>
-        </button>
-    </div>
 
     <!-- Quick Portal Switcher Dock -->
     <nav class="portal-switcher-dock" style="position: fixed; bottom: 20px; left: 20px; z-index: 999; display: flex; gap: 8px; background: rgba(16, 16, 22, 0.94); backdrop-filter: blur(12px); border: 1px solid var(--color-gold); padding: 8px 14px; border-radius: 999px; box-shadow: 0 8px 30px rgba(0,0,0,0.85); align-items: center;" aria-label="Portal Switcher">
         <span style="font-size: 0.72rem; color: var(--color-gold-light); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding-right: 8px; border-right: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; gap: 5px;">
             <i class="fa-solid fa-crown" style="color: var(--color-gold);"></i> Hub
         </span>
-        <a href="index.html" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Online Storefront">
+        <a href="index.html" style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-main); padding: 4px 12px; border-radius: 999px; background: rgba(197,160,89,0.12); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(197,160,89,0.12)'" title="Online Storefront">
             <i class="fa-solid fa-store"></i> Store
         </a>
         <a href="customer.html" style="font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--color-gold); color: #0b0b0d; text-decoration: none;" title="Customer Account & Orders">
             <i class="fa-solid fa-user"></i> Customer
         </a>
-        <a href="admin.html" target="_blank" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Admin Dashboard">
+        <a href="admin.html" target="_blank" style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-main); padding: 4px 12px; border-radius: 999px; background: rgba(197,160,89,0.12); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(197,160,89,0.12)'" title="Admin Dashboard">
             <i class="fa-solid fa-shield-halved"></i> Admin
         </a>
     </nav>

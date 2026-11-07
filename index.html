@@ -22,15 +22,9 @@
     <!-- Immediate Theme Initialization to Prevent FOUC -->
     <script>
         (function() {
-            var theme = localStorage.getItem('hf_theme_v2');
-            if (!theme) {
-                theme = 'light';
-                localStorage.setItem('hf_theme_v2', 'light');
-                localStorage.setItem('hf_theme', 'light');
-            } else {
-                theme = localStorage.getItem('hf_theme') || 'light';
-            }
+            var theme = localStorage.getItem('hf_theme') || localStorage.getItem('hf_theme_v2') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('hf_theme', theme);
         })();
     </script>
 </head>
@@ -200,16 +194,6 @@
 
             <!-- Utility Action Icons -->
             <div class="header-actions">
-                <!-- Luxury Black & White (B&W) Segmented Switcher -->
-                <div class="bw-theme-switcher" id="bwThemeSwitcher" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
-                    <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
-                        <i class="fa-solid fa-sun"></i> White
-                    </button>
-                    <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
-                        <i class="fa-solid fa-moon"></i> Black
-                    </button>
-                </div>
-
                 <!-- Search Button -->
                 <button class="action-btn" onclick="document.getElementById('searchInput')?.focus(); document.getElementById('shop-section')?.scrollIntoView({behavior: 'smooth'})" title="Search Garments">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -236,6 +220,12 @@
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span class="badge-count" id="cartBadgeCount">0</span>
                 </button>
+
+                <!-- Simple Theme Toggle Icons (White & Black) - Far Right Side -->
+                <div class="header-theme-icons" id="headerThemeIcons" role="group" aria-label="Theme Selection">
+                    <i class="fa-solid fa-sun theme-icon-opt theme-icon-white" onclick="setThemeMode('light'); event.stopPropagation();" title="White Mode (Sun)" role="button" aria-label="White Theme"></i>
+                    <i class="fa-solid fa-moon theme-icon-opt theme-icon-black" onclick="setThemeMode('dark'); event.stopPropagation();" title="Black Mode (Moon)" role="button" aria-label="Black Theme"></i>
+                </div>
 
                 <!-- Mobile Hamburger Button -->
                 <button class="hamburger-btn action-btn" id="hamburgerBtn" onclick="openMobileNav()" title="Open Navigation Menu" aria-label="Open mobile navigation">
@@ -825,10 +815,10 @@
         <a href="index.html" style="font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--color-gold); color: #0b0b0d; text-decoration: none;" title="Online Storefront">
             <i class="fa-solid fa-store"></i> Store
         </a>
-        <a href="customer.html" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Customer Account & Orders">
+        <a href="customer.html" style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-main); padding: 4px 12px; border-radius: 999px; background: rgba(197,160,89,0.12); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(197,160,89,0.12)'" title="Customer Account & Orders">
             <i class="fa-solid fa-user"></i> Customer
         </a>
-        <a href="admin.html" target="_blank" style="font-size: 0.78rem; font-weight: 600; color: #fff; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" title="Admin Dashboard">
+        <a href="admin.html" target="_blank" style="font-size: 0.78rem; font-weight: 600; color: var(--color-text-main); padding: 4px 12px; border-radius: 999px; background: rgba(197,160,89,0.12); text-decoration: none;" onmouseover="this.style.background='rgba(197,160,89,0.25)'" onmouseout="this.style.background='rgba(197,160,89,0.12)'" title="Admin Dashboard">
             <i class="fa-solid fa-shield-halved"></i> Admin
         </a>
     </nav>
@@ -1145,7 +1135,7 @@
 
             <!-- Step 1: Customer Contact Info -->
             <div id="coStep1">
-                <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                <h4 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.3rem; margin-bottom: 1.25rem;">
                     1. Contact Details
                 </h4>
                 <div class="form-grid">
@@ -1171,7 +1161,7 @@
 
             <!-- Step 2: Shipping Address Across Pakistan -->
             <div id="coStep2" style="display: none;">
-                <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                <h4 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.3rem; margin-bottom: 1.25rem;">
                     2. Delivery Address in Pakistan
                 </h4>
                 <div class="form-grid">
@@ -1206,7 +1196,7 @@
 
             <!-- Step 3: Payment Options (COD, JazzCash, EasyPaisa, Card) -->
             <div id="coStep3" style="display: none;">
-                <h4 style="font-family: var(--font-heading); color: #fff; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                <h4 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.3rem; margin-bottom: 1.25rem;">
                     3. Select Payment Method
                 </h4>
 
@@ -1270,11 +1260,11 @@
             <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-card-border); border-radius: var(--radius-md); padding: 1.25rem; max-width: 440px; margin: 0 auto 2rem; text-align: left; font-size: 0.85rem;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
                     <span style="color: var(--color-text-muted);">Customer:</span>
-                    <strong style="color: #fff;" id="successCustomerName">Arslan Tariq</strong>
+                    <strong style="color: var(--color-text-main);" id="successCustomerName">Arslan Tariq</strong>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
                     <span style="color: var(--color-text-muted);">Destination:</span>
-                    <span style="color: #fff;" id="successCity">DHA, Lahore</span>
+                    <span style="color: var(--color-text-main);" id="successCity">DHA, Lahore</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
                     <span style="color: var(--color-text-muted);">Payment:</span>
@@ -1308,7 +1298,7 @@
 
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <span class="section-subtitle">Precision Fit</span>
-                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.8rem;">Husnain Fashion Sizing Chart</h3>
+                <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.8rem;">Husnain Fashion Sizing Chart</h3>
                 <p style="color: var(--color-text-muted); font-size: 0.85rem;">All measurements are in Inches. Designed specifically for authentic Pakistani gentleman proportions.</p>
             </div>
 
@@ -1371,7 +1361,7 @@
 
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <div class="logo-crest" style="margin: 0 auto 0.75rem;">HF</div>
-                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.6rem;">Member Portal</h3>
+                <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.6rem;">Member Portal</h3>
                 <p style="color: var(--color-text-muted); font-size: 0.85rem;">Access your Pakistani orders, measurements & wishlist</p>
             </div>
 
@@ -1463,7 +1453,7 @@
 
             <div style="text-align: center; margin-bottom: 1.5rem;">
                 <span class="section-subtitle">Your Experience</span>
-                <h3 style="font-family: var(--font-heading); color: #fff; font-size: 1.6rem;">Review Husnain Fashion</h3>
+                <h3 style="font-family: var(--font-heading); color: var(--color-text-main); font-size: 1.6rem;">Review Husnain Fashion</h3>
             </div>
 
             <form onsubmit="submitNewReview(event)" style="display: flex; flex-direction: column; gap: 1rem;">
@@ -1514,12 +1504,17 @@
             </button>
         </div>
 
+        <!-- Dedicated Mobile Theme Strip (No Buttons, Only Icons) -->
+        <div class="mobile-nav-theme-strip">
+            <span class="mobile-theme-heading"><i class="fa-solid fa-palette"></i> Theme:</span>
+            <div class="header-theme-icons" id="bwThemeSwitcherMobile" role="group" aria-label="Mobile Theme Selector">
+                <i class="fa-solid fa-sun theme-icon-opt theme-icon-white" onclick="setThemeMode('light');" title="White Mode" role="button" aria-label="White Theme"></i>
+                <i class="fa-solid fa-moon theme-icon-opt theme-icon-black" onclick="setThemeMode('dark');" title="Black Mode" role="button" aria-label="Black Theme"></i>
+            </div>
+        </div>
+
         <!-- Quick Access Action Strip in Mobile Menu -->
         <div class="mobile-nav-quick-actions">
-            <button class="mobile-quick-btn" onclick="toggleTheme()" title="Toggle Light / Dark Mode">
-                <i class="fa-solid fa-moon theme-toggle-icon"></i>
-                <span class="theme-quick-label">Theme</span>
-            </button>
             <a href="#tracking-section" class="mobile-quick-btn" onclick="closeMobileNav()">
                 <i class="fa-solid fa-truck-fast"></i>
                 <span>Track</span>
@@ -1531,6 +1526,10 @@
             <button class="mobile-quick-btn" onclick="closeMobileNav(); toggleWishlistDrawer(true)">
                 <i class="fa-regular fa-heart"></i>
                 <span>Wishlist</span>
+            </button>
+            <button class="mobile-quick-btn" onclick="closeMobileNav(); toggleCartDrawer()">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>Bag</span>
             </button>
         </div>
 
@@ -1633,13 +1632,6 @@
         </div>
     </aside>
 
-    <!-- Floating Quick B&W Operation Widget -->
-    <div class="floating-bw-wrap">
-        <button class="floating-bw-toggle" id="floatingBwBtn" onclick="toggleTheme()" title="Switch Theme (Black & White)" aria-label="Toggle Black & White Theme">
-            <i class="fa-solid fa-circle-half-stroke"></i>
-            <span class="floating-bw-label">White ⚪ (Go Black)</span>
-        </button>
-    </div>
 
     <!-- Toast Notification Container -->
     <div class="toast-container" id="toastContainer"></div>

@@ -1891,26 +1891,44 @@ function showToast(message, type = 'info') {
 // Theme Management (Black & White Theme Operation)
 // ==========================================================================
 function initTheme() {
-    let savedTheme = localStorage.getItem('hf_theme_v2');
-    if (!savedTheme) {
-        savedTheme = 'light';
-        localStorage.setItem('hf_theme_v2', 'light');
-        localStorage.setItem('hf_theme', 'light');
-    } else {
-        savedTheme = localStorage.getItem('hf_theme') || 'light';
-    }
+    const savedTheme = localStorage.getItem('hf_theme') || localStorage.getItem('hf_theme_v2') || 'light';
     applyTheme(savedTheme, false);
 }
 
 function applyTheme(theme, showNotification = true) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('hf_theme', theme);
-    localStorage.setItem('hf_theme_v2', theme);
+    const activeTheme = (theme === 'dark') ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', activeTheme);
+    localStorage.setItem('hf_theme', activeTheme);
+    localStorage.setItem('hf_theme_v2', activeTheme);
+
+    // Update Pure Theme Toggle Icons (.theme-icon-white & .theme-icon-black)
+    const whiteIcons = document.querySelectorAll('.theme-icon-white');
+    const blackIcons = document.querySelectorAll('.theme-icon-black');
+
+    if (activeTheme === 'light') {
+        whiteIcons.forEach(ic => {
+            ic.classList.add('active');
+            ic.setAttribute('aria-pressed', 'true');
+        });
+        blackIcons.forEach(ic => {
+            ic.classList.remove('active');
+            ic.setAttribute('aria-pressed', 'false');
+        });
+    } else {
+        whiteIcons.forEach(ic => {
+            ic.classList.remove('active');
+            ic.setAttribute('aria-pressed', 'false');
+        });
+        blackIcons.forEach(ic => {
+            ic.classList.add('active');
+            ic.setAttribute('aria-pressed', 'true');
+        });
+    }
 
     // Update traditional theme icons
     const icons = document.querySelectorAll('.theme-toggle-icon');
     icons.forEach(icon => {
-        if (theme === 'light') {
+        if (activeTheme === 'light') {
             icon.className = 'fa-solid fa-sun theme-toggle-icon';
         } else {
             icon.className = 'fa-solid fa-moon theme-toggle-icon';
@@ -1919,39 +1937,35 @@ function applyTheme(theme, showNotification = true) {
 
     const labels = document.querySelectorAll('.theme-quick-label, .theme-toggle-label');
     labels.forEach(label => {
-        label.textContent = theme === 'light' ? 'White' : 'Black';
+        label.textContent = activeTheme === 'light' ? 'White' : 'Black';
     });
 
     // Update Floating B&W Button label
     const floatingLabels = document.querySelectorAll('.floating-bw-label');
     floatingLabels.forEach(fl => {
-        fl.textContent = theme === 'light' ? 'White ⚪ (Go Black)' : 'Black ⚫ (Go White)';
+        fl.textContent = activeTheme === 'light' ? 'White ⚪ (Go Black)' : 'Black ⚫ (Go White)';
     });
 
     // Update Segmented B&W Switcher pill buttons
-    const bwSwitchers = document.querySelectorAll('.bw-theme-switcher');
-    bwSwitchers.forEach(sw => {
-        const whiteBtn = sw.querySelector('.btn-opt-white');
-        const blackBtn = sw.querySelector('.btn-opt-black');
-        if (whiteBtn && blackBtn) {
-            if (theme === 'light') {
-                whiteBtn.classList.add('active');
-                blackBtn.classList.remove('active');
-            } else {
-                whiteBtn.classList.remove('active');
-                blackBtn.classList.add('active');
-            }
-        }
-    });
+    const whiteBtns = document.querySelectorAll('.btn-opt-white');
+    const blackBtns = document.querySelectorAll('.btn-opt-black');
+
+    if (activeTheme === 'light') {
+        whiteBtns.forEach(b => b.classList.add('active'));
+        blackBtns.forEach(b => b.classList.remove('active'));
+    } else {
+        whiteBtns.forEach(b => b.classList.remove('active'));
+        blackBtns.forEach(b => b.classList.add('active'));
+    }
 
     if (showNotification) {
-        showToast(theme === 'light' ? '⚪ Switched to Full Pure White Mode' : '⚫ Switched to Luxury Black Mode', 'info');
+        showToast(activeTheme === 'light' ? '⚪ Switched to Full Pure White Mode' : '⚫ Switched to Luxury Black Mode', 'info');
     }
 }
 
 function toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
+    const next = (current === 'dark') ? 'light' : 'dark';
     applyTheme(next, true);
 }
 
@@ -1960,6 +1974,12 @@ function setThemeMode(mode) {
         applyTheme(mode, true);
     }
 }
+
+// Ensure global accessibility for inline event handlers
+window.initTheme = initTheme;
+window.applyTheme = applyTheme;
+window.toggleTheme = toggleTheme;
+window.setThemeMode = setThemeMode;
 
 // ==========================================================================
 // Mobile Navigation Drawer Controller

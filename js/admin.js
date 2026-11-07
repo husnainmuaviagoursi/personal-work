@@ -46,26 +46,44 @@ document.addEventListener('DOMContentLoaded', () => {
 // Theme Toggle Engine (Black & White Operation)
 // --------------------------------------------------------------------------
 function initTheme() {
-    let saved = localStorage.getItem('hf_theme_v2');
-    if (!saved) {
-        saved = 'light';
-        localStorage.setItem('hf_theme_v2', 'light');
-        localStorage.setItem('hf_theme', 'light');
-    } else {
-        saved = localStorage.getItem('hf_theme') || 'light';
-    }
+    const saved = localStorage.getItem('hf_theme') || localStorage.getItem('hf_theme_v2') || 'light';
     applyTheme(saved);
 }
 
 function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('hf_theme', theme);
-    localStorage.setItem('hf_theme_v2', theme);
+    const activeTheme = (theme === 'dark') ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', activeTheme);
+    localStorage.setItem('hf_theme', activeTheme);
+    localStorage.setItem('hf_theme_v2', activeTheme);
+
+    // Update Pure Theme Toggle Icons (.theme-icon-white & .theme-icon-black)
+    const whiteIcons = document.querySelectorAll('.theme-icon-white');
+    const blackIcons = document.querySelectorAll('.theme-icon-black');
+
+    if (activeTheme === 'light') {
+        whiteIcons.forEach(ic => {
+            ic.classList.add('active');
+            ic.setAttribute('aria-pressed', 'true');
+        });
+        blackIcons.forEach(ic => {
+            ic.classList.remove('active');
+            ic.setAttribute('aria-pressed', 'false');
+        });
+    } else {
+        whiteIcons.forEach(ic => {
+            ic.classList.remove('active');
+            ic.setAttribute('aria-pressed', 'false');
+        });
+        blackIcons.forEach(ic => {
+            ic.classList.add('active');
+            ic.setAttribute('aria-pressed', 'true');
+        });
+    }
 
     // Update icons
     const icons = document.querySelectorAll('.theme-toggle-icon');
     icons.forEach(ic => {
-        if (theme === 'light') {
+        if (activeTheme === 'light') {
             ic.className = 'fa-solid fa-sun theme-toggle-icon';
         } else {
             ic.className = 'fa-solid fa-moon theme-toggle-icon';
@@ -74,29 +92,25 @@ function applyTheme(theme) {
 
     const labels = document.querySelectorAll('.theme-toggle-label');
     labels.forEach(lb => {
-        lb.textContent = theme === 'light' ? 'White' : 'Black';
+        lb.textContent = activeTheme === 'light' ? 'White' : 'Black';
     });
 
     const floatingLabels = document.querySelectorAll('.floating-bw-label');
     floatingLabels.forEach(fl => {
-        fl.textContent = theme === 'light' ? 'White ⚪ (Go Black)' : 'Black ⚫ (Go White)';
+        fl.textContent = activeTheme === 'light' ? 'White ⚪ (Go Black)' : 'Black ⚫ (Go White)';
     });
 
     // Update Segmented B&W Switcher pill buttons
-    const bwSwitchers = document.querySelectorAll('.bw-theme-switcher');
-    bwSwitchers.forEach(sw => {
-        const whiteBtn = sw.querySelector('.btn-opt-white');
-        const blackBtn = sw.querySelector('.btn-opt-black');
-        if (whiteBtn && blackBtn) {
-            if (theme === 'light') {
-                whiteBtn.classList.add('active');
-                blackBtn.classList.remove('active');
-            } else {
-                whiteBtn.classList.remove('active');
-                blackBtn.classList.add('active');
-            }
-        }
-    });
+    const whiteBtns = document.querySelectorAll('.btn-opt-white');
+    const blackBtns = document.querySelectorAll('.btn-opt-black');
+
+    if (activeTheme === 'light') {
+        whiteBtns.forEach(b => b.classList.add('active'));
+        blackBtns.forEach(b => b.classList.remove('active'));
+    } else {
+        whiteBtns.forEach(b => b.classList.remove('active'));
+        blackBtns.forEach(b => b.classList.add('active'));
+    }
 }
 
 function toggleTheme() {
@@ -104,6 +118,17 @@ function toggleTheme() {
     const next = current === 'dark' ? 'light' : 'dark';
     applyTheme(next);
 }
+
+function setThemeMode(mode) {
+    if (mode === 'light' || mode === 'dark') {
+        applyTheme(mode);
+    }
+}
+
+window.initTheme = initTheme;
+window.applyTheme = applyTheme;
+window.toggleTheme = toggleTheme;
+window.setThemeMode = setThemeMode;
 
 // --------------------------------------------------------------------------
 // Mobile Sidebar Controls

@@ -470,9 +470,34 @@
 [data-theme="light"] .sale-info h3,
 [data-theme="light"] .offer-card h4,
 [data-theme="light"] .season-card-content h3,
+[data-theme="light"] .about-content h2,
 [data-theme="light"] .about-text h2,
-[data-theme="light"] .vip-box h2 {
+[data-theme="light"] .about-feature-item h5,
+[data-theme="light"] .review-title,
+[data-theme="light"] .reviewer-info h6,
+[data-theme="light"] .vip-box h2,
+[data-theme="light"] .payment-opt-info h5,
+[data-theme="light"] .order-success-box h3,
+[data-theme="light"] .footer-column h4,
+[data-theme="light"] .calc-row.total-row {
     color: #0b0b0d !important;
+}
+
+[data-theme="light"] .size-table td {
+    background: #ffffff !important;
+    color: #0b0b0d !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .size-table th {
+    background: rgba(179, 139, 63, 0.12) !important;
+    color: #8c6720 !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .order-tracking-pill {
+    background: #ffffff !important;
+    border: 1px dashed var(--color-gold) !important;
 }
 
 [data-theme="light"] .offer-card {
@@ -635,78 +660,163 @@
 }
 
 /* ==========================================================================
-   Luxury Black & White (B&W) Segmented Switcher & Floating Widget
+   Pure Theme Toggle Icons (No Buttons, No Button Backgrounds)
    ========================================================================== */
+.theme-icon-opt {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 2px !important;
+    margin: 0 !important;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform var(--transition-fast), color var(--transition-fast), filter var(--transition-fast), opacity var(--transition-fast);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-icon-opt:hover {
+    transform: scale(1.22);
+}
+
+.theme-icon-opt:active {
+    transform: scale(0.92);
+}
+
+/* Floating Theme Icons Removed per request */
+.floating-theme-icons {
+    display: none !important;
+}
+
+/* Header Theme Icons (Top Navigation Bar - Pure Icons Only) */
+.header-theme-icons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 4px;
+    vertical-align: middle;
+}
+
+.header-theme-icons .theme-icon-opt {
+    font-size: 1.25rem;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   Theme Icon Colors & Active Visual State (Dark vs Light)
+   -------------------------------------------------------------------------- */
+
+/* IN DARK MODE (Website is Deep Black) */
+:root:not([data-theme="light"]) .theme-icon-white,
+[data-theme="dark"] .theme-icon-white {
+    color: #e2e8f0; /* Visible soft silver */
+    opacity: 0.65;
+}
+
+:root:not([data-theme="light"]) .theme-icon-white:hover,
+[data-theme="dark"] .theme-icon-white:hover {
+    color: #fde047; /* Radiant golden sun */
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(253, 224, 71, 0.8));
+}
+
+:root:not([data-theme="light"]) .theme-icon-black,
+[data-theme="dark"] .theme-icon-black {
+    color: var(--color-gold); /* Luxury gold moon */
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.65));
+}
+
+:root:not([data-theme="light"]) .theme-icon-black.active,
+[data-theme="dark"] .theme-icon-black.active {
+    color: var(--color-gold-bright);
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.9));
+}
+
+/* IN LIGHT MODE (Website is Pure White) */
+[data-theme="light"] .theme-icon-white {
+    color: #d97706; /* Warm rich golden sun */
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px rgba(217, 119, 6, 0.5));
+}
+
+[data-theme="light"] .theme-icon-white.active {
+    color: #b45309; /* Royal amber gold */
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 12px rgba(180, 83, 9, 0.7));
+}
+
+[data-theme="light"] .theme-icon-black {
+    color: #0b0b0d; /* Crisp deep obsidian black moon */
+    opacity: 0.6;
+}
+
+[data-theme="light"] .theme-icon-black:hover {
+    color: #000000;
+    opacity: 1;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+[data-theme="light"] .theme-icon-black.active {
+    color: #000000;
+    opacity: 1;
+    transform: scale(1.15);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Mobile Navigation Theme Strip */
+.mobile-nav-theme-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.4rem;
+    background: #0c0c10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] .mobile-nav-theme-strip {
+    background: #ffffff;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.mobile-theme-heading {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-gold-light);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+/* Backwards compatibility aliases */
 .bw-theme-switcher {
     display: inline-flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(197, 160, 89, 0.35);
-    border-radius: 999px;
-    padding: 3px;
-    cursor: pointer;
-    user-select: none;
-    transition: all var(--transition-fast);
-    position: relative;
+    background: transparent !important;
+    border: none !important;
+    gap: 12px;
 }
-
-.bw-theme-switcher:hover {
-    border-color: var(--color-gold);
-    box-shadow: 0 2px 12px rgba(197, 160, 89, 0.25);
-}
-
 .bw-option-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.32rem 0.85rem;
-    border-radius: 999px;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    color: var(--color-text-muted);
-    transition: all var(--transition-fast);
-    background: transparent;
-    border: 1px solid transparent;
-    cursor: pointer;
-}
-
-.bw-option-btn i {
-    font-size: 0.8rem;
-}
-
-/* Dark Mode states (Black active) */
-[data-theme="dark"] .bw-option-btn.btn-opt-black,
-:root:not([data-theme="light"]) .bw-option-btn.btn-opt-black,
-.bw-option-btn.btn-opt-black.active {
-    background: #000000;
-    color: #ffffff;
-    border-color: var(--color-gold);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-[data-theme="dark"] .bw-option-btn.btn-opt-white,
-:root:not([data-theme="light"]) .bw-option-btn.btn-opt-white {
-    color: #8e8b82;
-}
-
-/* Light Mode states (White active) */
-[data-theme="light"] .bw-theme-switcher {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="light"] .bw-option-btn.btn-opt-white,
-.bw-option-btn.btn-opt-white.active {
-    background: #ffffff;
-    color: #0b0b0d;
-    border-color: var(--color-gold);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .bw-option-btn.btn-opt-black {
-    color: #6b7280;
+    background: transparent !important;
+    border: none !important;
 }
 
 /* Floating B&W Operation Button */
@@ -2429,7 +2539,7 @@ input:focus, select:focus, textarea:focus {
     font-family: var(--font-heading);
     font-size: 1.05rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--color-text-main);
     line-height: 1.35;
     margin-bottom: 0.6rem;
     cursor: pointer;
@@ -4519,72 +4629,126 @@ body.nav-locked {
         font-size: 0.8rem;
     }
 
-    /* Product Grid: 2 Clean Mobile Columns */
+    /* Product Grid: 2 Clean Responsive Mobile Columns with No Overlapping */
     .product-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.75rem !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.65rem !important;
     }
 
     .product-card {
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-sm) !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        overflow: hidden !important;
     }
 
-    .product-image {
-        aspect-ratio: 3 / 4;
-        width: 100%;
-        height: auto;
-        object-fit: cover;
+    .product-media {
+        width: 100% !important;
+        aspect-ratio: 3 / 4 !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .product-media img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .btn-quick-view {
+        display: none !important;
     }
 
     .product-details {
-        padding: 0.65rem 0.75rem;
+        padding: 0.6rem 0.5rem !important;
+        min-width: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+    }
+
+    .product-meta {
+        font-size: 0.65rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .product-rating {
+        font-size: 0.68rem !important;
     }
 
     .product-title {
-        font-size: 0.82rem;
-        line-height: 1.25;
-        margin-bottom: 0.35rem;
+        font-size: 0.82rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 0.35rem !important;
+        min-height: 2.1em !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        word-break: break-word !important;
     }
 
-    .product-pricing {
-        gap: 0.35rem;
-        margin-bottom: 0.35rem;
-        flex-wrap: wrap;
-    }
-
-    .price-current {
-        font-size: 0.92rem;
-    }
-
-    .price-original {
-        font-size: 0.72rem;
-    }
-
-    .product-variations {
-        margin-bottom: 0.5rem;
-        gap: 0.25rem;
+    .product-swatches {
+        gap: 0.25rem !important;
+        margin-bottom: 0.35rem !important;
+        flex-wrap: wrap !important;
     }
 
     .swatch-circle {
-        width: 12px;
-        height: 12px;
+        width: 11px !important;
+        height: 11px !important;
+    }
+
+    .product-sizes-tags {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.2rem !important;
+        margin-bottom: 0.4rem !important;
     }
 
     .size-tag {
-        font-size: 0.62rem;
-        padding: 1px 4px;
+        font-size: 0.6rem !important;
+        padding: 1px 4px !important;
     }
 
-    .product-card-actions {
-        flex-direction: column;
-        gap: 0.35rem;
+    .product-pricing-wrap {
+        margin-bottom: 0.4rem !important;
     }
 
-    .product-card-actions .btn {
-        padding: 0.5rem 0.6rem;
-        font-size: 0.74rem;
-        width: 100%;
-        justify-content: center;
+    .price-box {
+        display: flex !important;
+        align-items: baseline !important;
+        flex-wrap: wrap !important;
+        gap: 0.3rem !important;
+    }
+
+    .price-current {
+        font-size: 0.88rem !important;
+        font-weight: 800 !important;
+    }
+
+    .price-original {
+        font-size: 0.7rem !important;
+    }
+
+    .product-card-btns {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.35rem !important;
+        margin-top: auto !important;
+        width: 100% !important;
+    }
+
+    .btn-card-add,
+    .btn-card-buy {
+        width: 100% !important;
+        padding: 0.45rem 0.35rem !important;
+        font-size: 0.72rem !important;
+        font-weight: 700 !important;
+        justify-content: center !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        border-radius: var(--radius-sm) !important;
     }
 
     /* Season Cards */
@@ -4763,6 +4927,30 @@ body.nav-locked {
         height: 48px;
         font-size: 1.35rem;
     }
+
+    .header-theme-icons {
+        gap: 10px !important;
+        padding: 0 2px !important;
+    }
+
+    .header-theme-icons .theme-icon-opt {
+        font-size: 1.15rem !important;
+        padding: 3px !important;
+    }
+
+    .floating-bw-wrap,
+    .floating-theme-icons {
+        display: none !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .header-theme-icons {
+        gap: 8px !important;
+    }
+    .header-theme-icons .theme-icon-opt {
+        font-size: 1.08rem !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -4797,6 +4985,32 @@ body.nav-locked {
 
     .announcement-links {
         display: none !important;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.5rem !important;
+    }
+
+    .product-details {
+        padding: 0.5rem 0.35rem !important;
+    }
+
+    .btn-card-add,
+    .btn-card-buy {
+        padding: 0.38rem 0.25rem !important;
+        font-size: 0.68rem !important;
+        gap: 0.25rem !important;
+    }
+
+    .floating-bw-wrap {
+        bottom: 72px !important;
+        right: 8px !important;
+    }
+
+    .floating-bw-toggle {
+        padding: 0.35rem 0.65rem !important;
+        font-size: 0.7rem !important;
     }
 
     /* Portal Switcher Dock on Small Screens */

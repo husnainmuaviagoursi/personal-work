@@ -17,15 +17,9 @@
     <!-- Immediate Theme Initialization to Prevent FOUC -->
     <script>
         (function() {
-            var theme = localStorage.getItem('hf_theme_v2');
-            if (!theme) {
-                theme = 'light';
-                localStorage.setItem('hf_theme_v2', 'light');
-                localStorage.setItem('hf_theme', 'light');
-            } else {
-                theme = localStorage.getItem('hf_theme') || 'light';
-            }
+            var theme = localStorage.getItem('hf_theme') || localStorage.getItem('hf_theme_v2') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('hf_theme', theme);
         })();
     </script>
 </head>
@@ -36,19 +30,15 @@
          ==================================================================== -->
     <div class="admin-login-screen" id="adminLoginScreen">
         <div style="position: absolute; top: 1.5rem; right: 1.5rem;">
-            <!-- Luxury Black & White (B&W) Segmented Switcher -->
-            <div class="bw-theme-switcher" id="bwThemeSwitcherLogin" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
-                <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
-                    <i class="fa-solid fa-sun"></i> White
-                </button>
-                <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
-                    <i class="fa-solid fa-moon"></i> Black
-                </button>
+            <!-- Simple Theme Toggle Icons (White & Black) - No Button Backgrounds -->
+            <div class="header-theme-icons" id="bwThemeSwitcherLogin" role="group" aria-label="Toggle Theme">
+                <i class="fa-solid fa-sun theme-icon-opt theme-icon-white" onclick="setThemeMode('light'); event.stopPropagation();" title="White Mode (Sun)" role="button" aria-label="White Theme"></i>
+                <i class="fa-solid fa-moon theme-icon-opt theme-icon-black" onclick="setThemeMode('dark'); event.stopPropagation();" title="Black Mode (Moon)" role="button" aria-label="Black Theme"></i>
             </div>
         </div>
         <div class="admin-login-box">
             <div class="sidebar-crest" style="margin: 0 auto 1.25rem; width: 56px; height: 56px; font-size: 1.5rem;">HF</div>
-            <h2 style="font-family: 'Cinzel', serif; color: #fff; font-size: 1.6rem; margin-bottom: 0.35rem;">Husnain Admin</h2>
+            <h2 style="font-family: 'Cinzel', serif; color: var(--text-main); font-size: 1.6rem; margin-bottom: 0.35rem;">Husnain Admin</h2>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2rem;">Authorized Personnel Only • Secure Portal</p>
 
             <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
@@ -159,21 +149,17 @@
                     </div>
                 </div>
                 <div class="topbar-actions">
-                    <!-- Luxury Black & White (B&W) Segmented Switcher -->
-                    <div class="bw-theme-switcher" id="bwThemeSwitcher" onclick="toggleTheme()" title="Switch Theme (Black & White)" role="button" aria-label="Toggle Black & White Theme">
-                        <button type="button" class="bw-option-btn btn-opt-white" title="Pure Full White Mode">
-                            <i class="fa-solid fa-sun"></i> White
-                        </button>
-                        <button type="button" class="bw-option-btn btn-opt-black" title="Signature Black Mode">
-                            <i class="fa-solid fa-moon"></i> Black
-                        </button>
-                    </div>
                     <button class="btn-gold btn-sm" onclick="openAddProductModal()">
                         <i class="fa-solid fa-plus"></i> Add Product
                     </button>
                     <button class="btn-outline btn-sm" onclick="openAddOfferModal()">
                         <i class="fa-solid fa-percent"></i> New Offer
                     </button>
+                    <!-- Simple Theme Toggle Icons (White & Black) - Far Right Side -->
+                    <div class="header-theme-icons" id="bwThemeSwitcher" role="group" aria-label="Theme Selection">
+                        <i class="fa-solid fa-sun theme-icon-opt theme-icon-white" onclick="setThemeMode('light'); event.stopPropagation();" title="White Mode (Sun)" role="button" aria-label="White Theme"></i>
+                        <i class="fa-solid fa-moon theme-icon-opt theme-icon-black" onclick="setThemeMode('dark'); event.stopPropagation();" title="Black Mode (Moon)" role="button" aria-label="Black Theme"></i>
+                    </div>
                 </div>
             </header>
 
@@ -424,7 +410,7 @@
     <div class="admin-modal-overlay" id="productModal">
         <div class="admin-modal-box">
             <button class="admin-modal-close" onclick="closeAdminModal('productModal')">&times;</button>
-            <h3 id="productModalTitle" style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 1.5rem;">Add New Garment</h3>
+            <h3 id="productModalTitle" style="font-family: 'Cinzel', serif; color: var(--text-main); margin-bottom: 1.5rem;">Add New Garment</h3>
 
             <form id="productForm" onsubmit="saveProduct(event)">
                 <input type="hidden" id="prodEditId">
@@ -543,7 +529,7 @@
     <div class="admin-modal-overlay" id="offerModal">
         <div class="admin-modal-box">
             <button class="admin-modal-close" onclick="closeAdminModal('offerModal')">&times;</button>
-            <h3 id="offerModalTitle" style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 1.5rem;">Create New Offer & Coupon</h3>
+            <h3 id="offerModalTitle" style="font-family: 'Cinzel', serif; color: var(--text-main); margin-bottom: 1.5rem;">Create New Offer & Coupon</h3>
 
             <form id="offerForm" onsubmit="saveOffer(event)">
                 <input type="hidden" id="offerEditId">
@@ -626,25 +612,25 @@
     <div class="admin-modal-overlay" id="orderModal">
         <div class="admin-modal-box">
             <button class="admin-modal-close" onclick="closeAdminModal('orderModal')">&times;</button>
-            <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 0.5rem;">Order Details: <span id="viewOrderId" style="color: var(--gold-light);"></span></h3>
+            <h3 style="font-family: 'Cinzel', serif; color: var(--text-main); margin-bottom: 0.5rem;">Order Details: <span id="viewOrderId" style="color: var(--gold-light);"></span></h3>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;" id="viewOrderDate"></p>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; background: var(--bg-dark); border: 1px solid var(--border-subtle); padding: 1.25rem; border-radius: var(--radius-sm);">
                 <div>
                     <h5 style="color: var(--gold-light); font-size: 0.82rem; text-transform: uppercase;">Consignee Information</h5>
-                    <p id="viewOrderCustomer" style="color: #fff; font-weight: 700; margin-top: 4px;"></p>
+                    <p id="viewOrderCustomer" style="color: var(--text-main); font-weight: 700; margin-top: 4px;"></p>
                     <p id="viewOrderPhone" style="color: var(--text-muted); font-size: 0.85rem;"></p>
                     <p id="viewOrderEmail" style="color: var(--text-muted); font-size: 0.85rem;"></p>
                 </div>
                 <div>
                     <h5 style="color: var(--gold-light); font-size: 0.82rem; text-transform: uppercase;">Shipping Destination</h5>
-                    <p id="viewOrderAddress" style="color: #fff; font-size: 0.88rem; margin-top: 4px;"></p>
+                    <p id="viewOrderAddress" style="color: var(--text-main); font-size: 0.88rem; margin-top: 4px;"></p>
                     <p id="viewOrderCity" style="color: var(--gold-primary); font-weight: 700;"></p>
                 </div>
             </div>
 
             <!-- Items List -->
-            <h5 style="color: #fff; font-size: 0.95rem; margin-bottom: 0.75rem;">Garments Ordered</h5>
+            <h5 style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 0.75rem;">Garments Ordered</h5>
             <div id="viewOrderItemsList" style="margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto;"></div>
 
             <!-- Financials -->
@@ -674,13 +660,6 @@
         </div>
     </div>
 
-    <!-- Floating Quick B&W Operation Widget -->
-    <div class="floating-bw-wrap">
-        <button class="floating-bw-toggle" id="floatingBwBtn" onclick="toggleTheme()" title="Switch Theme (Black & White)" aria-label="Toggle Black & White Theme">
-            <i class="fa-solid fa-circle-half-stroke"></i>
-            <span class="floating-bw-label">White ⚪ (Go Black)</span>
-        </button>
-    </div>
 
     <!-- Admin JavaScript Engine -->
     <script src="js/admin.js"></script>
